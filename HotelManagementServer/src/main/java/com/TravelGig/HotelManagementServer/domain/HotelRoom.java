@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -14,12 +16,15 @@ import javax.persistence.Transient;
 @Table(name="hotel_rooms")
 public class HotelRoom {		
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int hotelRoomId; //PK	
 	@ManyToOne
 	private RoomType type;
 	@ManyToMany
 	private Set<Amenities> amenities;
+	// 1-2
 	private int noRooms;
+	// 50-250 per night
 	private float price;
 	private float discount;
 	private String description;
@@ -100,6 +105,13 @@ public class HotelRoom {
 	}
 	public void setPolicies(String policies) {
 		this.policies = policies;
+	}
+	@Override
+	public String toString() {
+		return "HotelRoom [amenities=" + amenities + ", description=" + description + ", discount=" + discount
+				+ ", hotelName=" + hotelName + ", hotelRoomAmenityNames=" + hotelRoomAmenityNames + ", hotelRoomId="
+				+ hotelRoomId + ", noRooms=" + noRooms + ", policies=" + policies + ", price=" + price + ", roomType="
+				+ roomType + ", type=" + type + "]";
 	}
 	
 	

@@ -3,7 +3,10 @@ package com.TravelGig.HotelManagementServer.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.annotation.Generated;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -14,6 +17,7 @@ import javax.persistence.Transient;
 @Table(name="hotels")
 public class Hotel {	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int hotelId;
 	private String hotelName;
 	private String address;	
@@ -162,4 +166,14 @@ public class Hotel {
 	public void setImageURL(String imageURL) {
 		this.imageURL = imageURL;
 	}
+
+	@Override
+	public String toString() {
+		return "Hotel [address=" + address + ", amenities=" + amenities + ", averagePrice=" + averagePrice + ", city="
+				+ city + ", description=" + description + ", discount=" + discount + ", email=" + email
+				+ ", hotelAmenityNames=" + hotelAmenityNames + ", hotelId=" + hotelId + ", hotelName=" + hotelName
+				+ ", hotelRooms=" + hotelRooms + ", imageURL=" + imageURL + ", mobile=" + mobile + ", starRating="
+				+ starRating + ", state=" + state + ", timesBooked=" + timesBooked + "]";
+	}
+	
 }

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $("#hotelSubmit").on("click", function(){
+                const data = {hotelAmenityNames:[]}
+                const inputs = $("#hotel").children(".data")
+                const as = $("#Amenities").children("input:checked")
+                for(let i of inputs){
+                    data[$(i).attr("name")] = $(i).val()
+                }
+                for(let a of as){
+                    data["hotelAmenityNames"].push($(a).attr("name"))
+                }
+                $.ajax({
+                    url: 'http://localhost:8282/saveHotel',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: "json",
+                    data: JSON.stringify(data),
+                    cache: false
+                }).done(function(data){
+                    console.log(data)
+                }).fail(function (xhr, status, error) {
+                    console.log(`${xhr.status}: ${xhr.statusText}`)
+                })
+            })
+
+            $("#roomSubmit").on("click", function(){
+                const data = {hotelRoomAmenityNames:[]}
+                const inputs = $("#hotelRoom").children(".data")
+                const as = $("#roomAmenities").children("input:checked")
+                for(let i of inputs){
+                    data[$(i).attr("name")] = $(i).val()
+                }
+                for(let a of as){
+                    data["hotelRoomAmenityNames"].push($(a).attr("name"))
+                }
+
+                $.ajax({
+                    url: 'http://localhost:8282/saveRoom',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: "json",
+                    data: JSON.stringify(data),
+                    cache: false
+                }).done(function(data){
+                    console.log(data)
+                }).fail(function (xhr, status, error) {
+                    console.log(`${xhr.status}: ${xhr.statusText}`)
+                })
+            })
+            
+        })
+    </script>
+</head>
+<body>
+    <div id="hotel">
+        <!-- HotelId: <input type="number" class="data" name="hotelId" value=1 /><br> -->
+        HotelName: <input type="text" class="data" name="hotelName" /><br>
+        Address: <input type="text" class="data" name="address" /><br>
+        City: <input type="text" class="data" name="city"  /><br>
+        State: <input type="text" class="data" name="state"  /><br>
+        StarRating: <input type="number" class="data" name="starRating" /><br>
+        AveragePrice: <input type="number" class="data" name="averagePrice" /><br>
+        Discount: <input type="number" class="data" name="discount" /><br>
+        Description: <input type="text" class="data" name="description" /><br>
+        Email: <input type="email" class="data" name="email"  /><br>
+        Mobile: <input type="text" class="data" name="mobile" /><br>
+        ImageURL: <input type="text" class="data" name="imageURL" /><br>
+        TimesBooked: <input type="number" class="data" name="timesBooked"/><br>
+        <h2>Amenities</h2>
+        <div id="Amenities">
+            <input type="checkbox" name="Free WiFi" class="data">Free WiFi
+            <input type="checkbox" name="Non-smoking rooms" class="data">Non-smoking rooms
+            <input type="checkbox" name="24-hour front desk" class="data">24-hour front desk
+            <input type="checkbox" name="Facilities for disabled guests" class="data">Facilities for disabled guests
+            <input type="checkbox" name="Fitness center" class="data">Fitness center
+            <input type="checkbox" name="Parking" class="data">Parking
+            <input type="checkbox" name="Pet friendly" class="data">Pet friendly
+            <input type="checkbox" name="Restaurant" class="data">Restaurant
+            <input type="checkbox" name="Family rooms" class="data">Family rooms
+            <input type="checkbox" name="Room service" class="data">Room service
+            <input type="checkbox" name="Airport shuttle" class="data">Airport shuttle
+            <input type="checkbox" name="Swimming pool" class="data">Swimming pool
+            <input type="checkbox" name="Spa" class="data">Spa
+            <input type="checkbox" name="Electric vehicle charging station" class="data">Electric vehicle charging station
+            <input type="checkbox" name="Private bathroom" class="data">Private bathroom
+            <input type="checkbox" name="Air conditioning" class="data">Air conditioning
+            <input type="checkbox" name="Laptop-friendly workspace" class="data">Laptop-friendly workspace
+            <input type="checkbox" name="Bathtub" class="data">Bathtub
+            <input type="checkbox" name="Flat-screen TV" class="data">Flat-screen TV
+            <input type="checkbox" name="Soundproof" class="data">Soundproof
+            <input type="checkbox" name="View" class="data">View
+            <input type="checkbox" name="Coffee/Tea maker" class="data">Coffee/Tea maker
+            <input type="checkbox" name="Coffee machine" class="data">Coffee machine
+            <input type="checkbox" name="Kitchen/Kitchenette" class="data">Kitchen/Kitchenette
+        </div>
+        <button id="hotelSubmit">save hotel</button>
+        
+    </div>
+    <h2>hotelRooms</h2>
+    <div id="hotelRoom">
+        
+            <!-- HotelRoomId: <input type="text" name="HotelRoomId" class="data" /><br> -->
+            NoRooms: <input type="text" name="NoRooms" class="data" /><br>
+            Price: <input type="text" name="Price" class="data" /><br>
+            Discount: <input type="text" name="Discount" class="data" /><br>
+            Description: <input type="text" name="Description" class="data" /><br>
+            policies: <input type="text" name="policies" class="data" /><br>
+            hotelName: <input type="text" name="hotelName" class="data" /><br>
+            <select class="data" name="roomType" id="roomType">
+                <option value="Single room">Single room</option>
+                <option value="Double room ">Double room </option>
+                <option value="Triple room">Triple room</option>
+                <option value="Quad room">Quad room</option>
+                <option value="Standard room">Standard room</option>
+                <option value="Deluxe room">Deluxe room</option>
+                <option value="Joint room">Joint room</option>
+                <option value="Connecting room">Connecting room</option>
+                <option value="Suite">Suite</option>
+                <option value="Apartment-style">Apartment-style</option>
+                <option value="Accessible room">Accessible room</option>
+            </select>
+            <h2>Room Amenities</h2>
+            <div id="roomAmenities">
+                <input type="checkbox" name="Free WiFi" class="data">Free WiFi
+                <input type="checkbox" name="Non-smoking rooms" class="data">Non-smoking rooms
+                <input type="checkbox" name="24-hour front desk" class="data">24-hour front desk
+                <input type="checkbox" name="Facilities for disabled guests" class="data">Facilities for disabled guests
+                <input type="checkbox" name="Fitness center" class="data">Fitness center
+                <input type="checkbox" name="Parking" class="data">Parking
+                <input type="checkbox" name="Pet friendly" class="data">Pet friendly
+                <input type="checkbox" name="Restaurant" class="data">Restaurant
+                <input type="checkbox" name="Family rooms" class="data">Family rooms
+                <input type="checkbox" name="Room service" class="data">Room service
+                <input type="checkbox" name="Airport shuttle" class="data">Airport shuttle
+                <input type="checkbox" name="Swimming pool" class="data">Swimming pool
+                <input type="checkbox" name="Spa" class="data">Spa
+                <input type="checkbox" name="Electric vehicle charging station" class="data">Electric vehicle charging station
+                <input type="checkbox" name="Private bathroom" class="data">Private bathroom
+                <input type="checkbox" name="Air conditioning" class="data">Air conditioning
+                <input type="checkbox" name="Laptop-friendly workspace" class="data">Laptop-friendly workspace
+                <input type="checkbox" name="Bathtub" class="data">Bathtub
+                <input type="checkbox" name="Flat-screen TV" class="data">Flat-screen TV
+                <input type="checkbox" name="Soundproof" class="data">Soundproof
+                <input type="checkbox" name="View" class="data">View
+                <input type="checkbox" name="Coffee/Tea maker" class="data">Coffee/Tea maker
+                <input type="checkbox" name="Coffee machine" class="data">Coffee machine
+                <input type="checkbox" name="Kitchen/Kitchenette" class="data">Kitchen/Kitchenette
+            </div>
+            <select class="data" name="roomType" id="roomType">
+                <option value="Single room">Single room</option>
+                <option value="Double room ">Double room </option>
+                <option value="Triple room">Triple room</option>
+                <option value="Quad room">Quad room</option>
+                <option value="Standard room">Standard room</option>
+                <option value="Deluxe room">Deluxe room</option>
+                <option value="Joint room">Joint room</option>
+                <option value="Connecting room">Connecting room</option>
+                <option value="Suite">Suite</option>
+                <option value="Apartment-style">Apartment-style</option>
+                <option value="Accessible room">Accessible room</option>
+            </select>
+            <button id="roomSubmit">save room</button>
+        
+    </div>
+
+</body>
+</html>
