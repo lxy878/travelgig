@@ -1,5 +1,6 @@
 package com.TravelGig.HotelManagementServer.service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,11 @@ public class HotelServiceImpl implements HotelService{
             hotel.getAmenities().add(a);
         }
         return hotelRepository.save(hotel);
+    }
+
+    @Override
+    public List<Hotel> getHotelsByWord(String word){
+        return hotelRepository.findAllByHotelNameContainingOrCityContainingOrStateContainingOrAddressContaining(word, word, word, word);
     }
     
 }

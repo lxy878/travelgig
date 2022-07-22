@@ -3,11 +3,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Home Page of Travel Gig</title>
-<script src="jquery-2.1.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="home.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="/css/home.css"/>
+<script src="/js/home.js"></script>
 </head>
 <body>
 <div class="container" style="margin-left:100px">
@@ -17,23 +19,23 @@
 
 <div class="container border rounded" style="margin:auto;padding:50px;margin-top:50px;margin-bottom:50px">
 	<h3>Narrow your search results</h3>
-	<div class="form-row">
-	<div class="col-3">
-		Hotel/City/State/Address <input class="form-control" type="text" id="searchLocation" name="searchLocation"/>
-	</div>
-	<div class="col-2">
-		No. Rooms: <input class="form-control" type="number" id="noRooms" name="noRooms"/>
-	</div>
-	<div class="col-2">
-		No. Guests: <input class="form-control" type="number" id="noGuests" name="noGuests"/>
-	</div>
-	<div class="col">
-	Check-In Date: <input type="date" id="checkInDate" name="checkInDate"/>
-	</div>
-	<div class="col">
-	Check-Out Date: <input type="date" id="checkOutDate" name="checkOutDate"/>
-	</div>
-	<input class="btn-sm btn-primary" type="button" id="searchBtn" value="SEARCH"/>
+	<div class="form-row" id="searchForm">
+		<div class="col-3">
+			Hotel/City/State/Address <input class="form-control" type="text" id="searchLocation" name="searchLocation"/>
+		</div>
+		<div class="col-2">
+			No. Rooms: <input class="form-control" type="number" id="noRooms" name="noRooms"/>
+		</div>
+		<div class="col-2">
+			No. Guests: <input class="form-control" type="number" id="noGuests" name="noGuests"/>
+		</div>
+		<div class="col">
+		Check-In Date: <input type="date" id="checkInDate" name="checkInDate"/>
+		</div>
+		<div class="col">
+		Check-Out Date: <input type="date" id="checkOutDate" name="checkOutDate"/>
+		</div>
+		<input class="btn-sm btn-primary" type="button" id="searchBtn" value="SEARCH"/>
 	</div>
 </div>
 
@@ -109,7 +111,6 @@
 	<div style='text-align:center;font-size:20px;font-family:"Trebuchet MS", Helvetica, sans-serif'>List of Hotels:</div>	
 	
 	<div id="listHotel">
-	
 	</div>
 	
 </div>

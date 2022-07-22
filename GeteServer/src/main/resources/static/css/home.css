@@ -1,0 +1,20 @@
+.bi-star-fill{
+    color: rgb(255, 238, 0);
+}
+
+.img-fluid{
+    height: 100%;
+}
+
+.font-small{
+    font-size: small;
+}
+
+.font-large{
+    font-size: large;
+}
+
+a.a-none, a.a-none:hover{
+    color: black;
+    text-decoration: none;
+}
