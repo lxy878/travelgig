@@ -21,7 +21,7 @@ public class HotelRoom {
 	@ManyToOne
 	private RoomType type;
 	@ManyToMany
-	private Set<Amenities> amenities;
+	private Set<Amenities> amenities= new HashSet<>();
 	// 1-2
 	private int noRooms;
 	// 50-250 per night

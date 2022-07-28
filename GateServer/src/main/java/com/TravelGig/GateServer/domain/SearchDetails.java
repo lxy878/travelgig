@@ -37,6 +37,11 @@ public class SearchDetails {
 	public void setNoOfGuests(int noOfGuests) {
 		this.noOfGuests = noOfGuests;
 	}
+	@Override
+	public String toString() {
+		return "SearchDetails [checkIn=" + checkIn + ", checkOut=" + checkOut + ", noOfGuests=" + noOfGuests
+				+ ", noOfRooms=" + noOfRooms + ", searchHotel=" + searchHotel + "]";
+	}
 	
 	
 }

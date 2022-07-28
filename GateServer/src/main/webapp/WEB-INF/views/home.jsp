@@ -116,7 +116,7 @@
 </div>
 </div>
 
-<div class="modal" id="myModal">
+<div class="modal" id="roomSearch">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -128,17 +128,17 @@
 
       <!-- Modal body -->
       <div class="modal-body">        
-        <div class="col">
-        	<input class="form-control" type="hidden" id="modal_hotelId"/>
-        	Hotel Name: <input readonly="true" class="form-control" type="text" id="modal_hotelName"/>
-        	No. Guests: <input class="form-control" type="number" id="modal_noGuests"/>
-        	Check-In Date: <input class="form-control" type="date" id="modal_checkInDate"/>
-        	Check-Out Date: <input class="form-control" type="date" id="modal_checkOutDate"/>
+        <div class="col" id="roomSearchInputs">
+        	<input class="form-control" type="hidden" id="modal_hotelId" name="hotelId"/>
+        	Hotel Name: <input readonly="true" class="form-control" type="text" id="modal_hotelName" name="hotelName"/>
+        	No. Guests: <input class="form-control" type="number" id="modal_noGuests" name="noGuests"/>
+        	Check-In Date: <input class="form-control" type="date" id="modal_checkInDate" name="checkInDate"/>
+        	Check-Out Date: <input class="form-control" type="date" id="modal_checkOutDate" name="checkOutDate"/>
         	Room Type: 
-        	<select class="form-control" id="select_roomTypes">
+        	<select class="form-control" id="modal_roomType" name="roomTypes">
         	</select>
-        	No. Rooms: <input class="form-control" type="number" id="modal_noRooms"/>
-        	<input style="margin-top:25px" class="btn btn-searchHotelRooms form-control btn-primary" type="button" id="" value="SEARCH"/>       	
+        	No. Rooms: <input class="form-control" type="number" id="modal_noRooms" name="noRooms"/>
+        	<input style="margin-top:25px" class="btn btn-searchHotelRooms btn-primary" type="button" data-dismiss="modal" data-toggle="modal" data-target="#roomSearchResult" value="SEARCH"/>       	
         </div>
         
       </div>
@@ -152,24 +152,31 @@
   </div>
 </div>
 
-<div class="modal" id="hotelRoomsModal">
+<div class="modal" id="roomSearchResult">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Are these details correct?</h4>
+        <h4 class="modal-title">Room Options</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body" id="hotelRooms_modalBody">        
-              
+
+		<table class="table table-hover">
+			<thead>
+				<tr><th>Room Type/Amenities</th><th>Number of Rooms</th><th>Description/Policies</th><th>Discount</th><th>Price</th><th>Select Amount</th><th>Cost</th></tr>
+			</thead>
+			<tbody id="roomList">
+			</tbody>
+		</table>
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#bookingHotelRoomModal">View Amount</button>
       </div>
 
     </div>
@@ -198,10 +205,13 @@
        			<div>Check-In Date: <input readonly="true" class="form-control" type="text" id="booking_checkInDate"/></div>
        			<div>Check-Out Date: <input readonly="true" class="form-control" type="text" id="booking_checkOutDate"/></div>
        			<div>Room Type: <input readonly="true" class="form-control" type="text" id="booking_roomType"/></div>
-       			<div>Discount: $<span id="booking_discount"></span></div>
+       			<%-- <div>Discount: $<span id="booking_discount"></span></div> --%>
        			<div>Total Price: $<span id="booking_price"></span></div>       			
        			<div style='margin-top:20px'>
        				<button class='btn-confirm-booking btn btn-primary'>Confirm Booking</button>
+					<%-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roomSearch" hotelId=${hotelId}>
+                                        <strong>$${averagePrice-averagePrice*discount}</strong>
+                                    </button>    --%>
        				<button class='btn btn-primary'>Edit</button>
        			</div>
         	</div>          

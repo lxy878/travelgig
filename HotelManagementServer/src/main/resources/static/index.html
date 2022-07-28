@@ -42,7 +42,6 @@
                 for(let a of as){
                     data["hotelRoomAmenityNames"].push($(a).attr("name"))
                 }
-
                 $.ajax({
                     url: 'http://localhost:8282/saveRoom',
                     type: 'POST',
@@ -109,15 +108,15 @@
     <div id="hotelRoom">
         
             <!-- HotelRoomId: <input type="text" name="HotelRoomId" class="data" /><br> -->
-            NoRooms: <input type="text" name="NoRooms" class="data" /><br>
-            Price: <input type="text" name="Price" class="data" /><br>
-            Discount: <input type="text" name="Discount" class="data" /><br>
-            Description: <input type="text" name="Description" class="data" /><br>
+            NoRooms: <input type="number" name="noRooms" class="data" /><br>
+            Price: <input type="number" name="price" class="data" /><br>
+            Discount: <input type="text" name="discount" class="data" /><br>
+            Description: <input type="text" name="description" class="data" /><br>
             policies: <input type="text" name="policies" class="data" /><br>
             hotelName: <input type="text" name="hotelName" class="data" /><br>
             <select class="data" name="roomType" id="roomType">
                 <option value="Single room">Single room</option>
-                <option value="Double room ">Double room </option>
+                <option value="Double room">Double room </option>
                 <option value="Triple room">Triple room</option>
                 <option value="Quad room">Quad room</option>
                 <option value="Standard room">Standard room</option>
@@ -155,19 +154,6 @@
                 <input type="checkbox" name="Coffee machine" class="data">Coffee machine
                 <input type="checkbox" name="Kitchen/Kitchenette" class="data">Kitchen/Kitchenette
             </div>
-            <select class="data" name="roomType" id="roomType">
-                <option value="Single room">Single room</option>
-                <option value="Double room ">Double room </option>
-                <option value="Triple room">Triple room</option>
-                <option value="Quad room">Quad room</option>
-                <option value="Standard room">Standard room</option>
-                <option value="Deluxe room">Deluxe room</option>
-                <option value="Joint room">Joint room</option>
-                <option value="Connecting room">Connecting room</option>
-                <option value="Suite">Suite</option>
-                <option value="Apartment-style">Apartment-style</option>
-                <option value="Accessible room">Accessible room</option>
-            </select>
             <button id="roomSubmit">save room</button>
         
     </div>

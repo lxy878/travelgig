@@ -1,6 +1,7 @@
 package com.TravelGig.HotelManagementServer.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,18 @@ public class HotelServiceImpl implements HotelService{
     @Override
     public List<Hotel> getHotelsByWord(String word){
         return hotelRepository.findAllByHotelNameContainingOrCityContainingOrStateContainingOrAddressContaining(word, word, word, word);
+    }
+
+    @Override
+    public Hotel findByName(String name){
+        return hotelRepository.findByHotelName(name);
+    }
+
+    @Override
+    public Hotel findByHotelId(int id) {
+        Optional<Hotel> hotel = hotelRepository.findById(id);
+        
+        return hotel.isPresent()? hotel.get():null;
     }
     
 }

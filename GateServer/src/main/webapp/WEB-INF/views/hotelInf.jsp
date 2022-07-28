@@ -21,99 +21,26 @@
 	<h3>Narrow your search results</h3>
 	<div class="form-row" id="searchForm">
 		<div class="col-3">
-			Hotel/City/State/Address <input class="form-control" type="text" id="searchLocation" name="searchLocation"/>
+			Hotel/City/State/Address <input class="form-control" type="text" id="searchLocation" name="searchLocation" value="${searchLocation}"/>
 		</div>
 		<div class="col-2">
-			No. Rooms: <input class="form-control" type="number" id="noRooms" name="noRooms"/>
+			No. Rooms: <input class="form-control" type="number" id="noRooms" name="noRooms" value="${noRooms}"/>
 		</div>
 		<div class="col-2">
-			No. Guests: <input class="form-control" type="number" id="noGuests" name="noGuests"/>
+			No. Guests: <input class="form-control" type="number" id="noGuests" name="noGuests" value="${noGuests}"/>
 		</div>
 		<div class="col">
-		Check-In Date: <input type="date" id="checkInDate" name="checkInDate"/>
+		Check-In Date: <input type="date" id="checkInDate" name="checkInDate" value="${checkInDate}"/>
 		</div>
 		<div class="col">
-		Check-Out Date: <input type="date" id="checkOutDate" name="checkOutDate"/>
+		Check-Out Date: <input type="date" id="checkOutDate" name="checkOutDate" value="${checkOutDate}"/>
 		</div>
 		<input class="btn-sm btn-primary" type="button" id="searchBtn" value="SEARCH"/>
 	</div>
 </div>
 
 <div class="row">
-<div class="col-2 border rounded" style="margin-left:50px;padding:25px">
-	
-	<br>	
-	<!--  Star Rating: 
-	<select class="form-control" id="filter_starRating">
-		<option value=0>Select</option>
-		<option value=1>1</option>
-		<option value=2>2</option>
-		<option value=3>3</option>
-		<option value=4>4</option>
-		<option value=5>5</option>
-	</select><br>--> 
-	
-	Star Rating:<br>
-	<div class="form-check-inline">
-		<label class="form-check-label">
-			<input type="checkbox" class="star_rating form-check-input" id="1_star_rating" value=1>1
-		</label>
-	</div>
-	<div class="form-check-inline">
-		<label class="form-check-label">
-			<input type="checkbox" class="star_rating form-check-input" id="2_star_rating" value=2>2		
-		</label>
-	</div>
-	<div class="form-check-inline">
-		<label class="form-check-label">
-			<input type="checkbox" class="star_rating form-check-input" id="3_star_rating" value=3>3
-		</label>
-	</div>
-	<div class="form-check-inline">
-		<label class="form-check-label">
-			<input type="checkbox" class="star_rating form-check-input" id="4_star_rating" value=4>4
-		</label>
-	</div>
-	<div class="form-check-inline">
-		<label class="form-check-label">
-			<input type="checkbox" class="star_rating form-check-input" id="5_star_rating" value=5>5
-		</label>
-	</div><br><br>
-	
-	Range:
-	<div class="slidecontainer">
-  		<input type="range" min="1" max="500" value="500" class="slider" id="priceRange">
-  		<p>Price: $<span id="priceValue"></span></p>
-	</div>
-	
-	<div class="form-check">
-		<input type="checkbox" class="hotel_amenity form-check-input" id="amenity_parking" value="PARKING"/>
-		<label class="form-check-label" for="amenity_parking">Parking</label><br>
-		
-		<input type="checkbox" class="hotel_amenity form-check-input" id="amenity_checkin_checkout" value="CHECK-IN & CHECK-OUT TIMES"/>
-		<label class="form-check-label" for="amenity_checkin_checkout">Check-In & Check-Out Times</label><br>
-		
-		<input type="checkbox" class="hotel_amenity form-check-input" id="amenity_breakfast" value="BREAKFAST"/>
-		<label class="form-check-label" for="amenity_breakfast">Breakfast</label><br>
-		
-		<input type="checkbox" class="hotel_amenity form-check-input" id="amenity_bar_lounge" value="BAR OR LOUNGE"/>
-		<label class="form-check-label" for="amenity_bar_lounge">Bar / Lounge</label><br>
-		
-		<input type="checkbox" class="hotel_amenity form-check-input" id="amenity_fitness_center" value="FITNESS CENTER"/>
-		<label class="form-check-label" for="amenity_fitness_center">Fitness Center</label><br>
-	</div>
-	
-	<input style="margin-top:25px" class="btn btn-primary" type="button" id="filterBtn" value="FILTER"/>	
-</div>
 
-
-<div class="col-7 border rounded" style="margin-left:50px;">
-	<div style='text-align:center;font-size:20px;font-family:"Trebuchet MS", Helvetica, sans-serif'>List of Hotels:</div>	
-	
-	<div id="listHotel">
-	</div>
-	
-</div>
 </div>
 
 <div class="modal" id="myModal">

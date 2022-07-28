@@ -1,6 +1,7 @@
 package com.TravelGig.HotelManagementServer.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.TravelGig.HotelManagementServer.domain.Hotel;
 import com.TravelGig.HotelManagementServer.domain.HotelRoom;
+import com.TravelGig.HotelManagementServer.domain.RoomType;
 import com.TravelGig.HotelManagementServer.service.HotelRoomService;
 import com.TravelGig.HotelManagementServer.service.HotelService;
+import com.TravelGig.HotelManagementServer.service.RoomTypeService;
 
 
 @RestController
@@ -22,6 +25,9 @@ public class HotelController {
 
     @Autowired
     HotelRoomService hotelRoomService;
+
+    @Autowired
+    RoomTypeService roomTypeService;
 
     @GetMapping("/getHotels/{searchInput}")
     private List<Hotel> getHotels(@PathVariable String searchInput){
@@ -35,8 +41,18 @@ public class HotelController {
 
     @PostMapping("/saveRoom")
     public HotelRoom addRoom(@RequestBody HotelRoom room) {
-        hotelRoomService.save(room);
-        return null;
+        return hotelRoomService.save(room);
+    }
+
+    @GetMapping("/getRooms/{hotelId}")
+    public Set<HotelRoom> getRooms(@PathVariable int hotelId){
+        Hotel hotel = hotelService.findByHotelId(hotelId);
+        return hotel.getHotelRooms();
+    }
+
+    @GetMapping("/getRoomTypes")
+    public List<RoomType> getRoomTypes(){ 
+        return roomTypeService.findAll();
     }
     
 }
