@@ -167,7 +167,7 @@
 
 		<table class="table table-hover">
 			<thead>
-				<tr><th>Room Type/Amenities</th><th>Number of Rooms</th><th>Description/Policies</th><th>Discount</th><th>Price</th><th>Select Amount</th><th>Cost</th></tr>
+				<tr><th>Room Type/Amenities</th><th>Number of Rooms</th><th>Description/Policies</th><th>Discount</th><th>Price</th><th>Select Amount</th></tr>
 			</thead>
 			<tbody id="roomList">
 			</tbody>
@@ -196,24 +196,22 @@
       <!-- Modal body -->
       <div class="modal-body" id="bookingRoom_modalBody">        
         	<div class="col">
-       			<div><input class="form-control" type="hidden" id="booking_hotelId"/></div>
-       			<div><input class="form-control" type="hidden" id="booking_hotelRoomId"/></div>
-	        	<div>Hotel Name: <input readonly="true" class="form-control" type="text" id="booking_hotelName"/></div>
-	        	<div>Customer Mobile: <input class="form-control" type="text" id="booking_customerMobile"/></div>
-       			<div id="noGuestsDiv">No. Guests: <input readonly="true" class="form-control" type="number" id="booking_noGuests"/></div>
-       			<div>No. Rooms: <input readonly="true" class="form-control" type="number" id="booking_noRooms"/></div>
-       			<div>Check-In Date: <input readonly="true" class="form-control" type="text" id="booking_checkInDate"/></div>
-       			<div>Check-Out Date: <input readonly="true" class="form-control" type="text" id="booking_checkOutDate"/></div>
-       			<div>Room Type: <input readonly="true" class="form-control" type="text" id="booking_roomType"/></div>
-       			<%-- <div>Discount: $<span id="booking_discount"></span></div> --%>
-       			<div>Total Price: $<span id="booking_price"></span></div>       			
+			<form action="/bookingStatus" method="post">
+       			<div><input class="form-control" type="hidden" id="booking_hotelId" name="hotelId"/></div>
+				<div><input class="form-control" type="hidden" id="booking_hotelRoomId" name="hotelRoomId"/></div>
+	        	<div>Hotel Name: <input readonly="true" class="form-control" type="text" id="booking_hotelName" name="hotelName"/></div>
+	        	<div>Email: <input class="form-control" type="text" id="booking_email" name="email"/></div>
+       			<div id="noGuestsDiv">No. Guests: <input readonly="true" class="form-control" type="number" id="booking_noGuests" name="noGuests"/></div>
+       			<div>No. Rooms: <input readonly="true" class="form-control" type="number" id="booking_noRooms" name="noRooms" /></div>
+       			<div>Check-In Date: <input readonly="true" class="form-control" type="text" id="booking_checkInDate" name="checkInDate"/></div>
+       			<div>Check-Out Date: <input readonly="true" class="form-control" type="text" id="booking_checkOutDate" name="checkOutDate"/></div>
+       			<div>Room Type: <input readonly="true" class="form-control" type="text" id="booking_roomType" name="roomType"/></div>
+       			<div>Total Price: $<input class="form-control" type="number" id="booking_price" name="price" readonly="true"></span></div>       			
        			<div style='margin-top:20px'>
-       				<button class='btn-confirm-booking btn btn-primary'>Confirm Booking</button>
-					<%-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roomSearch" hotelId=${hotelId}>
-                                        <strong>$${averagePrice-averagePrice*discount}</strong>
-                                    </button>    --%>
+       				<input type="submit" class='btn-confirm-booking btn btn-primary' id="booking" value="Confirm Booking"/>
        				<button class='btn btn-primary'>Edit</button>
        			</div>
+			</form>
         	</div>          
       </div>
 

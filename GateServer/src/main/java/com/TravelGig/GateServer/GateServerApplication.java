@@ -6,8 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class GateServerApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		SpringApplication.run(GateServerApplication.class, args);
+		// BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        //  String pw = encoder.encode("a");
+        //  System.out.println(pw);
 	}
 
 }
