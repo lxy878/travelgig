@@ -15,6 +15,7 @@
 <div class="container" style="margin-left:100px">
 <h1>Welcome to Travel Gig</h1>
 <h2>Search your desired hotel</h2>
+<a href=""></a>
 </div>
 
 <div class="container border rounded" style="margin:auto;padding:50px;margin-top:50px;margin-bottom:50px">
@@ -42,17 +43,7 @@
 <div class="row">
 <div class="col-2 border rounded" style="margin-left:50px;padding:25px">
 	
-	<br>	
-	<!--  Star Rating: 
-	<select class="form-control" id="filter_starRating">
-		<option value=0>Select</option>
-		<option value=1>1</option>
-		<option value=2>2</option>
-		<option value=3>3</option>
-		<option value=4>4</option>
-		<option value=5>5</option>
-	</select><br>--> 
-	
+	<br>
 	Star Rating:<br>
 	<div class="form-check-inline">
 		<label class="form-check-label">
@@ -209,7 +200,8 @@
        			<div>Total Price: $<input class="form-control" type="number" id="booking_price" name="price" readonly="true"></span></div>       			
        			<div style='margin-top:20px'>
        				<input type="submit" class='btn-confirm-booking btn btn-primary' id="booking" value="Confirm Booking"/>
-       				<button class='btn btn-primary'>Edit</button>
+       				<button class='btn btn-primary' data-dismiss="modal" data-toggle="modal" data-target="#roomSearch" id="book_edit">Edit</button>
+					<%-- <button class='btn btn-primary' >Edit</button> --%>
        			</div>
 			</form>
         	</div>          

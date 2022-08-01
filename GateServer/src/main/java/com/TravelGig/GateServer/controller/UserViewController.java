@@ -59,6 +59,7 @@ public class UserViewController {
     private String getUpcomeReservation(){
         return "";
     }
+
     @RequestMapping("/registerUser")
     private String registerUser(){
         return "registerUser";
@@ -67,11 +68,11 @@ public class UserViewController {
 	@RequestMapping("/bookingStatus")
 	private String bookingStatus(Model model, BookingDetail bd){
 
-		System.out.println(bd.toString());
-
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode json = mapper.convertValue(bd, JsonNode.class);
-		// bookingClient.postRequest(json, "/bookingRooms");
+		JsonNode respond = bookingClient.postRequest(json, "/bookingRooms");
+		// add some message
+		
 		model.addAttribute("message", "testing");
 		return "bookingStatus";
 	}

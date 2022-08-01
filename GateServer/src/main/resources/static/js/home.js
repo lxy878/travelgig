@@ -28,7 +28,7 @@ $(function(){
         const button = $(event.relatedTarget)
         const roomSearchInputs = $("#roomSearchInputs")
         const hotelId = button.attr("hotelId")
-        const hotelName = button.parent().parent().parent().find("h5").text()
+        const hotelName = button.attr("hotelName")
         const inputs = {}
         const hotelSearchDivs = $("#searchForm").children("div")
         for(let d of hotelSearchDivs){
@@ -96,21 +96,26 @@ $(function(){
 
         const roomTrs = $("#roomList").children("tr")
 
+        const i = new Date($("#booking_checkInDate").val())
+        const o = new Date($("#booking_checkOutDate").val())
+        const days = (o-i)/1000/3600/24
+
         for(let tr of roomTrs){
             const isSelected = $(tr).find("td input").prop("checked")
             if(isSelected){
-                // set roomId
                 $("#booking_hotelRoomId").val($(tr).attr("roomId"))
                 const price = $(tr).find("td[name=price]").text()
                 const discount = $(tr).find("td[name=discount]").text()
                 const noRooms = $("#booking_noRooms").val()
-                const totalCost = parseFloat(price)*(1-parseFloat(discount))*noRooms
+                const totalCost = parseFloat(price)*(1-parseFloat(discount))*noRooms*days
                 $("#booking_price").val(totalCost)
                 break
             }
-            
         }
-        
+
+        const editButton = $("#book_edit")
+        editButton.attr("hotelId", $("#booking_hotelId").val())
+        editButton.attr("hotelName", $("#booking_hotelName").val())
     })
 })
 
@@ -168,7 +173,7 @@ function showHotel({imageURL, city, state, averagePrice, discount, hotelId, hote
                             <div class="row g-0">
                                 <div class="col-md-9"></div>
                                 <div class="col-md-3 font-large">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roomSearch" hotelId=${hotelId}>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roomSearch" hotelId=${hotelId} hotelName="${hotelName}">
                                         <strong>$${averagePrice-averagePrice*discount}</strong>
                                     </button>   
                                 </div>
