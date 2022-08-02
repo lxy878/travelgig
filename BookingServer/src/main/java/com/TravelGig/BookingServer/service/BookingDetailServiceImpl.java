@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.TravelGig.BookingServer.domain.BookingDetail;
+import com.TravelGig.BookingServer.domain.Hotel;
+import com.TravelGig.BookingServer.domain.User;
 import com.TravelGig.BookingServer.repository.BookingDetailRepository;
 
 @Service
@@ -15,9 +17,20 @@ public class BookingDetailServiceImpl implements BookingDetailService{
     @Autowired
     BookingDetailRepository bookingDetailRepository;
     
+    @Autowired
+    HotelService hotelService;
+
+    @Autowired
+    UserService userService;
+
     @Override
     public BookingDetail save(BookingDetail bd) {
         bd.setStatus("booked");
+        Hotel h = hotelService.getHotel(bd.getHotelId());
+        bd.setCheckInTime(h.getTimesBooked());
+        bd.setCheckOutTime(h.getTimesBooked());
+        User u = userService.getUser(bd.getEmail());
+        bd.setUserName(u.getLastName()+", "+u.getFirstName());
         return bookingDetailRepository.save(bd);
     }
     

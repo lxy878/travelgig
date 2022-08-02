@@ -4,10 +4,12 @@ $(function(){
     $("#upcoming_button").on("click", function(){
         getReservations("booked")
     })
+
     $("#cancelled_button").on("click", function(){
         
         getReservations("cancelled")
     }) 
+
     $("#completed_button").on("click", function(){
         getReservations("completed")
     })
@@ -20,8 +22,8 @@ $(function(){
             type: "get",
             contentType: "application/json",
             cache: false
-        }).done(function(message){
-            console.log(message)
+        }).done(function(cancelBooking){
+            console.log(cancelBooking)
             getReservations("booked")
     
         }).fail(function (xhr, status, error) {
@@ -55,8 +57,12 @@ function getReservations(status){
     })
 }
 
-function setReservation({id, hotelName, checkInDate, checkOutDate, noRooms, status}){
+function setReservation({id, hotelName, checkInDate, checkOutDate, noRooms, status, userName, checkInTime, checkOutTime}){
     let action = ""
+    const i = new Date(checkInDate)
+    const o = new Date(checkOutDate)
+    const days = (o-i)/1000/3600/24
+
     if(status === "booked"){
         action = `<button class="btn btn-primary" name="cancel">Cancel Reservation</button>`
     }else if(status === "completed"){
@@ -71,9 +77,9 @@ function setReservation({id, hotelName, checkInDate, checkOutDate, noRooms, stat
             <div class="row">
                 <div class="col-9">
                     <div class="row">
-                        <div class="col-4"><h5>Check In Time</h5><p>${checkInDate}</p><p>Check in at 00:00</p></div>
-                        <div class="col-4"><h5>Check Out Time</h5><p>${checkOutDate}</p><p>Check out at 00:00</p></div>
-                        <div class="col-4"><p>${noRooms} rooms, n nights</p> <p>Last Name, First Name</p></div>
+                        <div class="col-4"><h5>Check In Time</h5><p>${checkInDate}</p><p>Check in at ${checkInTime}</p></div>
+                        <div class="col-4"><h5>Check Out Time</h5><p>${checkOutDate}</p><p>Check out at ${checkOutTime}</p></div>
+                        <div class="col-4"><p>${noRooms} rooms, ${days} nights</p> <p>${userName}</p></div>
                     </div>
                 </div>
                 <div class="col-3">${action}</div>

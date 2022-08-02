@@ -24,10 +24,17 @@ public class BookingDetail {
     private String status;
 
     private String userName;
-    private String checkInTime;
-    private String checkOutTime;
-    private String days;
+    private int checkInTime;
+    private int checkOutTime;
     
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -122,6 +129,22 @@ public class BookingDetail {
 
     public void setId(int id) {
         Id = id;
+    }
+
+    public int getCheckInTime() {
+        return checkInTime;
+    }
+
+    public void setCheckInTime(int checkInTime) {
+        this.checkInTime = checkInTime;
+    }
+
+    public int getCheckOutTime() {
+        return checkOutTime;
+    }
+
+    public void setCheckOutTime(int checkOutTime) {
+        this.checkOutTime = checkOutTime;
     }
     
 }
