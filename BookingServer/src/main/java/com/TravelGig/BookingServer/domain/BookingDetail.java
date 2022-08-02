@@ -21,7 +21,21 @@ public class BookingDetail {
     private String checkOutDate;
     private String roomType;
     private float price;
+    private String status;
+
+    private String userName;
+    private String checkInTime;
+    private String checkOutTime;
+    private String days;
     
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public int getHotelId() {
         return hotelId;
     }
@@ -109,14 +123,5 @@ public class BookingDetail {
     public void setId(int id) {
         Id = id;
     }
-
-    @Override
-    public String toString() {
-        return "BookingDetail [Id=" + Id + ", checkInDate=" + checkInDate + ", checkOutDate=" + checkOutDate
-                + ", email=" + email + ", hotelId=" + hotelId + ", hotelName=" + hotelName + ", hotelRoomId="
-                + hotelRoomId + ", noGuests=" + noGuests + ", noRooms=" + noRooms + ", price=" + price + ", roomType="
-                + roomType + "]";
-    }
-    
     
 }

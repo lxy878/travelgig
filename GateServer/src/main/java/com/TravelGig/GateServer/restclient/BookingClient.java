@@ -28,4 +28,14 @@ public class BookingClient {
         
         return respond;
     }
+
+    public JsonNode getRequest(String path){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<Object> entity = template.getForEntity(baseUrl+path, Object.class);
+
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.convertValue(entity.getBody(), JsonNode.class);
+    }
 }

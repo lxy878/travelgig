@@ -15,7 +15,8 @@
 <div class="container" style="margin-left:100px">
 <h1>Welcome to Travel Gig</h1>
 <h2>Search your desired hotel</h2>
-<a href=""></a>
+<a href="/user/upcomeReservation/${uId}">View</a>
+<a href="/login">login</a>
 </div>
 
 <div class="container border rounded" style="margin:auto;padding:50px;margin-top:50px;margin-bottom:50px">

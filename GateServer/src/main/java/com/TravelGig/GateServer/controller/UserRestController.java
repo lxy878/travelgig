@@ -3,6 +3,8 @@ package com.TravelGig.GateServer.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,9 +29,17 @@ public class UserRestController {
         return new ResponseEntity<>("Account is created", HttpStatus.OK);
     }
 
-    @PostMapping("/api/bookingrooms")
-    private ResponseEntity<JsonNode> saveUser(@RequestBody JsonNode json){
-        JsonNode respond = bookingClient.postRequest(json, "/bookingRooms");
+    @PostMapping("/user/getBookingDetails")
+    private ResponseEntity<JsonNode> getBookingDetails(@RequestBody JsonNode json){
+        JsonNode respond = bookingClient.postRequest(json, "/getBookingDetails");
         return new ResponseEntity<>(respond, HttpStatus.OK);
     }
+
+    @GetMapping("/user/cancelBooking/{bId}")
+    private ResponseEntity<JsonNode> getBookingDetails(@PathVariable int bId){
+        System.out.println("cancel");
+        JsonNode respond = bookingClient.getRequest("/cancelBookingDetails/"+bId);
+        return new ResponseEntity<>(respond, HttpStatus.OK);
+    }
+
 }

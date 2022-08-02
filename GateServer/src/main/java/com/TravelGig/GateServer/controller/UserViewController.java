@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -55,9 +56,10 @@ public class UserViewController {
 
  	}
 
-    @RequestMapping("user/upcomeReservation")
-    private String getUpcomeReservation(){
-        return "";
+    @RequestMapping("user/upcomeReservation/{uId}")
+    private String getUpcomeReservation(@PathVariable String uId, Model model){
+		model.addAttribute("uId", uId);
+        return "viewReservation";
     }
 
     @RequestMapping("/registerUser")
@@ -74,6 +76,7 @@ public class UserViewController {
 		// add some message
 		
 		model.addAttribute("message", "testing");
+		// redirect to user/upcomeReservation/{user email}
 		return "bookingStatus";
 	}
 }
