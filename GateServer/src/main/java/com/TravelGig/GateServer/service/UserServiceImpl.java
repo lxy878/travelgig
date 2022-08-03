@@ -1,6 +1,7 @@
 package com.TravelGig.GateServer.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.TravelGig.GateServer.domain.Role;
@@ -24,6 +25,8 @@ public class UserServiceImpl implements UserService{
             if(r==null) r = new Role(rn);
             user.getRoles().add(r);
         }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

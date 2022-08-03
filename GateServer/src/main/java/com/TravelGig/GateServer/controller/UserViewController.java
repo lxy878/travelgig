@@ -62,11 +62,6 @@ public class UserViewController {
         return "viewReservation";
     }
 
-    @RequestMapping("/registerUser")
-    private String registerUser(){
-        return "registerUser";
-    }
-
 	@RequestMapping("/bookingStatus")
 	private String bookingStatus(Model model, BookingDetail bd){
 
