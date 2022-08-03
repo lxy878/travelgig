@@ -8,4 +8,5 @@ import com.TravelGig.BookingServer.domain.BookingDetail;
 
 public interface BookingDetailRepository extends JpaRepository<BookingDetail, Integer>{
     public List<BookingDetail> findAllByEmailAndStatus(String email, String status);
+    public List<BookingDetail> findAllByStatusAndCheckInDateBefore(String status, String checkIn);
 }

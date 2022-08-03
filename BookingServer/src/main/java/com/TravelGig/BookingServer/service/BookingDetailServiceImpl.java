@@ -1,5 +1,7 @@
 package com.TravelGig.BookingServer.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,5 +50,16 @@ public class BookingDetailServiceImpl implements BookingDetailService{
         BookingDetail bd = obd.get();
         bd.setStatus("cancelled");
         return bookingDetailRepository.save(bd);
+    }
+
+    @Override
+    public List<BookingDetail> completedBooking(){
+        String currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        List<BookingDetail> bookings = bookingDetailRepository.findAllByStatusAndCheckInDateBefore("booked", currentDate);
+        for(BookingDetail bd : bookings){
+            bd.setStatus("completed");
+        }
+        bookingDetailRepository.saveAll(bookings);
+        return bookings;
     }
 }
