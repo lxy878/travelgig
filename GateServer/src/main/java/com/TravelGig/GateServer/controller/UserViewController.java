@@ -68,8 +68,8 @@ public class UserViewController {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode json = mapper.convertValue(bd, JsonNode.class);
 		JsonNode respond = bookingClient.postRequest(json, "/bookingRooms");
-		// add some message
 		
+		System.out.println(respond.get("email").asText());
 		model.addAttribute("message", "testing");
 		// redirect to user/upcomeReservation/{user email}
 		return "bookingStatus";

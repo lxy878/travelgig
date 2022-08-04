@@ -192,7 +192,7 @@
        			<div><input class="form-control" type="hidden" id="booking_hotelId" name="hotelId"/></div>
 				<div><input class="form-control" type="hidden" id="booking_hotelRoomId" name="hotelRoomId"/></div>
 	        	<div>Hotel Name: <input readonly="true" class="form-control" type="text" id="booking_hotelName" name="hotelName"/></div>
-	        	<div>Email: <input class="form-control" type="text" id="booking_email" name="email"/></div>
+	        	<div>Email: <input class="form-control" type="email" id="booking_email" name="email"/></div>
        			<div id="noGuestsDiv">No. Guests: <input readonly="true" class="form-control" type="number" id="booking_noGuests" name="noGuests"/></div>
        			<div>No. Rooms: <input readonly="true" class="form-control" type="number" id="booking_noRooms" name="noRooms" /></div>
        			<div>Check-In Date: <input readonly="true" class="form-control" type="text" id="booking_checkInDate" name="checkInDate"/></div>

@@ -57,3 +57,5 @@ build/
 .vscode/
 
 TODO.md
+
+pdf/*

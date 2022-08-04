@@ -28,7 +28,7 @@ public class BookingController {
     @PostMapping(value="/bookingRooms")
     public BookingDetail postMethodName(@RequestBody BookingDetail bd) {
         bd = bookingDetailService.save(bd);
-        emailService.sentEmail(bd.getEmail(), "Hotel Reservation Comfirmation", messageForm(bd));
+        emailService.sentEmail(bd.getEmail(), bd.getId(), "Hotel Reservation Comfirmation", messageForm(bd));
         return bd;
     }
 
