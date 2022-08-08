@@ -217,6 +217,29 @@
   </div>
 </div>
 
+<div class="modal" id="hotelViews">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+	  	<div id="hotel_viewHeader"></div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" id="hotel_viewBody">        
+        	         
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <script>
 var slider = document.getElementById("priceRange");
 var output = document.getElementById("priceValue");

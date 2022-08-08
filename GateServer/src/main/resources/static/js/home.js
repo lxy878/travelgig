@@ -117,6 +117,42 @@ $(function(){
         editButton.attr("hotelId", $("#booking_hotelId").val())
         editButton.attr("hotelName", $("#booking_hotelName").val())
     })
+
+    $("#hotelViews").on("shown.bs.modal", function(event){
+        const hotelId = $(event.relatedTarget).attr("hotelId")
+        // get hotel and show info in #hotel_viewHeader
+        $.ajax({
+            url: `http://localhost:8080/getHotel/${hotelId}`,
+            type: "get",
+            contentType: "application/json",
+            cache: false
+        }).done(function(hotel){
+            const header = $("#hotel_viewHeader")
+            header.empty()
+            // add css
+            header.append(`<h3>${hotel.hotelName}</h3>`)
+           
+        }).fail(function (xhr, status, error) {
+            console.log(`${xhr.status}: ${xhr.statusText}`)
+        })
+        // get comments and show in #hotel_viewBody
+        $.ajax({
+            url: `http://localhost:8080/getComments/${hotelId}`,
+            type: "get",
+            contentType: "application/json",
+            cache: false
+        }).done(function(comments){
+            const body = $("#hotel_viewBody")
+            body.empty()
+            for(let c of comments){
+                // add css
+                body.append(`<div>${c.comment}</div>`)
+            }
+           
+        }).fail(function (xhr, status, error) {
+            console.log(`${xhr.status}: ${xhr.statusText}`)
+        })
+    })
 })
 
 function setRoom({hotelRoomId, type, noRooms, description, policies, price, discount, amenities}){
@@ -168,7 +204,10 @@ function showHotel({imageURL, city, state, averagePrice, discount, hotelId, hote
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title text-truncate">${hotelName}</h5>
-                            <p class="card-text"><small class="text-muted">${city}, ${state} </small> ${stars}</p>
+                            <p class="card-text">
+                                <small class="text-muted">${city}, ${state} </small>
+                                <a role="button" data-toggle="modal" data-target="#hotelViews" hotelId=${hotelId}>${stars}</a>
+                            </p>
                             <div class="row g-0">${as}</div><br>
                             <div class="row g-0">
                                 <div class="col-md-9"></div>

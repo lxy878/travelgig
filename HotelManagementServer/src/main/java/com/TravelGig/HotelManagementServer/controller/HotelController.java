@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.TravelGig.HotelManagementServer.domain.Comment;
 import com.TravelGig.HotelManagementServer.domain.Hotel;
 import com.TravelGig.HotelManagementServer.domain.HotelRoom;
 import com.TravelGig.HotelManagementServer.domain.RoomType;
+import com.TravelGig.HotelManagementServer.service.CommentService;
 import com.TravelGig.HotelManagementServer.service.HotelRoomService;
 import com.TravelGig.HotelManagementServer.service.HotelService;
 import com.TravelGig.HotelManagementServer.service.RoomTypeService;
@@ -28,6 +30,9 @@ public class HotelController {
 
     @Autowired
     RoomTypeService roomTypeService;
+
+    @Autowired
+    CommentService commentService;
 
     @GetMapping("/getHotels/{searchInput}")
     private List<Hotel> getHotels(@PathVariable String searchInput){
@@ -54,5 +59,14 @@ public class HotelController {
     public List<RoomType> getRoomTypes(){ 
         return roomTypeService.findAll();
     }
-    
+
+    @GetMapping("/getHotel/{hotelId}")
+    private Hotel getHotelBy(@PathVariable int hotelId){
+        return hotelService.findByHotelId(hotelId);
+    }
+
+    @GetMapping("/getComments/{hotelId}")
+    private List<Comment> getCommentsByHotel(@PathVariable int hotelId){
+        return commentService.getCommentsBy(hotelId);
+    }
 }

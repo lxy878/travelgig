@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +33,18 @@ public class HotelRestController {
     @PostMapping("/getRooms")
     private ResponseEntity<JsonNode> getRooms(@RequestBody JsonNode json){
         JsonNode respond = hotelManagementClient.getRequest("/getRooms/"+json.get("hotelId").asInt());
+        return new ResponseEntity<>(respond, HttpStatus.OK);
+    }
+
+    @GetMapping("/getHotel/{hotelId}")
+    private ResponseEntity<JsonNode> getHotel(@PathVariable int hotelId){
+        JsonNode respond = hotelManagementClient.getRequest("/getHotel/"+hotelId);
+        return new ResponseEntity<>(respond, HttpStatus.OK);
+    }
+
+    @GetMapping("/getComments/{hotelId}")
+    private ResponseEntity<JsonNode> getComments(@PathVariable int hotelId){
+        JsonNode respond = hotelManagementClient.getRequest("/getComments/"+hotelId);
         return new ResponseEntity<>(respond, HttpStatus.OK);
     }
 }
