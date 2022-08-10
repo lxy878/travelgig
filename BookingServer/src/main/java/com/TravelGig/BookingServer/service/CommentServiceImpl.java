@@ -31,4 +31,13 @@ public class CommentServiceImpl implements CommentService{
         return commentRepository.findAllByUserIdAndHotelId(uId, hotelId);
     }
     
+    @Override
+    public int countRate(int hotelId){
+        return commentRepository.countRate(hotelId);
+    }
+
+    @Override
+    public int sumRate(int hotelId){
+        return commentRepository.sumRate(hotelId);
+    }
 }

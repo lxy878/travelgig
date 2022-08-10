@@ -8,6 +8,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="/css/view.css"/>
 <script src="/js/reservationControl.js"></script>
 </head>
 <body>
@@ -46,10 +47,93 @@
                     </div>
                     <%-- <div class="col-3"><h2>Completed</h2></div> --%>
                     <div class="col-3"><button class="btn btn-primary">Cancel Reservation</button></div>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#comment">Leave a Comment</button>
                 </div>
             </div>
         </div>
     </div>
-   
+    <div class="modal" id="comment">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Leave a Comment</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" id="hotelRooms_modalBody">        
+                <div class="form-floating comment">
+                    <textarea class="form-control" name="comment" placeholder="Leave a comment here" id="textarea"></textarea>
+                </div>
+                Rate: 
+                <div class="form-check form-check-inline comment_rate">
+                    <input class="form-check-input" type="radio" name="rate" value="1">
+                    <label class="form-check-label" >1</label>
+                </div>
+                <div class="form-check form-check-inline comment_rate">
+                    <input class="form-check-input " type="radio" name="rate" value="2">
+                    <label class="form-check-label" >2</label>
+                </div>
+                <div class="form-check form-check-inline comment_rate">
+                    <input class="form-check-input" type="radio" name="rate" value="3">
+                    <label class="form-check-label" >3</label>
+                </div>
+                <div class="form-check form-check-inline comment_rate">
+                    <input class="form-check-input" type="radio" name="rate" value="4">
+                    <label class="form-check-label" >4</label>
+                </div>
+                <div class="form-check form-check-inline comment_rate">
+                    <input class="form-check-input" type="radio" name="rate" value="5">
+                    <label class="form-check-label" >5</label>
+                </div>
+
+                <br><input style="margin-top:25px" class="btn btn-searchHotelRooms btn-primary" type="button" data-dismiss="modal" value="Comment" id="commentSubmit"/>       	
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                
+            </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="hotelViews">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div id="hotel_viewHeader"></div>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" id="hotel_viewBody">        
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">userEmail</h5>
+                        <div>rate/5</div>
+                        <p class="card-text">comment</p>
+                    </div>
+                </div><br>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">userEmail</h5>
+                        <div>rate/5</div>
+                        <p class="card-text">comment</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+            </div>
+
+            </div>
+        </div>
+    </div>
 </body>
 </html>

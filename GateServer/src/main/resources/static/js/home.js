@@ -145,8 +145,7 @@ $(function(){
             const body = $("#hotel_viewBody")
             body.empty()
             for(let c of comments){
-                // add css
-                body.append(`<div>${c.comment}</div>`)
+                body.append(loadComment(c))
             }
            
         }).fail(function (xhr, status, error) {
@@ -154,6 +153,17 @@ $(function(){
         })
     })
 })
+
+function loadComment({userId, rate, comment}){
+    let stars = ratingStars(rate)
+
+    return `<div class="card">
+                <div class="card-header">${userId} ${stars}</div>
+                <div class="card-body">
+                    <p class="card-text">${comment}</p>
+                </div>
+            </div><br>`
+}
 
 function setRoom({hotelRoomId, type, noRooms, description, policies, price, discount, amenities}){
     
@@ -189,12 +199,9 @@ function setRoomType({name}){
 }
 function showHotel({imageURL, city, state, averagePrice, discount, hotelId, hotelName, starRating, amenities}){
     let as = ""
-    let stars = ""
+    let stars = ratingStars(starRating)
     for(let a of amenities.slice(0,3)){
         as += `<i class="bi bi-check"></i><div class="col-md-3 font-small">${a.name}</div>`
-    }
-    for(let i=0; i<starRating; i++){
-        stars += `<i class="bi bi-star-fill"></i>`
     }
     return `<div class="card mb-3">
                 <div class="row g-0">
@@ -221,4 +228,16 @@ function showHotel({imageURL, city, state, averagePrice, discount, hotelId, hote
                     </div>
                 </div>
             </div>`
+}
+
+function ratingStars(rate){
+    let stars = ""
+    let i;
+    for(i=1; i<=rate; i++){
+        stars += `<i class="bi bi-star-fill"></i>`
+    }
+    for(i; i<=5; i++){
+        stars += `<i class="bi bi-star"></i>`
+    }
+    return stars
 }

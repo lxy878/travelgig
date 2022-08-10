@@ -20,4 +20,11 @@ public class HotelService {
         }
         return h.get();
     }
+    public Hotel geHotel(String name){
+        return hotelRepository.findByHotelName(name);
+    }
+
+    public Hotel update(Hotel hotel){
+        return hotelRepository.save(hotel);
+    }
 }

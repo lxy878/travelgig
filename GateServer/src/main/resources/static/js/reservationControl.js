@@ -55,9 +55,102 @@ function getReservations(status){
     }).fail(function (xhr, status, error) {
         console.log(`${xhr.status}: ${xhr.statusText}`)
     })
+
+    $("#comment").on("shown.bs.modal", function(event){
+        const hotelName = $(event.relatedTarget).attr("hotelName")
+        $("#commentSubmit").attr("hotelName", hotelName)
+    })
+    
+    $("#commentSubmit").on('click', function(){
+        const data = {hotelName: $(this).attr("hotelName"), userId: $("#user").attr("uId")}
+        const body = $(this).parent()
+        const comment = body.find(".comment").find("textarea")
+        data[$(comment).attr("name")] = $(comment).val()
+        const rates = body.children(".comment_rate")
+        for(let r of rates){
+            const input = $(r).find("input")
+            if(input.is(":checked")){
+                data[input.attr("name")] = input.val()
+                break
+            }
+        }
+        $.ajax({
+            url: `http://localhost:8080/user/makeComment`,
+            type: "post",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(data),
+            cache: false
+        }).done(function(data){
+            console.log(data)
+    
+        }).fail(function (xhr, status, error) {
+            console.log(`${xhr.status}: ${xhr.statusText}`)
+        })
+        
+    })
+
+    $("#hotelViews").on("shown.bs.modal", function(event){
+        const hotelId = $(event.relatedTarget).attr("hotelId")
+        // get hotel and show info in #hotel_viewHeader
+        $.ajax({
+            url: `http://localhost:8080/getHotel/${hotelId}`,
+            type: "get",
+            contentType: "application/json",
+            cache: false
+        }).done(function(hotel){
+            const header = $("#hotel_viewHeader")
+            header.empty()
+            // add css
+            header.append(`<h3>${hotel.hotelName}</h3>`)
+           
+        }).fail(function (xhr, status, error) {
+            console.log(`${xhr.status}: ${xhr.statusText}`)
+        })
+        // get comments and show in #hotel_viewBody
+        $.ajax({
+            url: `http://localhost:8080/getComments/${hotelId}`,
+            type: "get",
+            contentType: "application/json",
+            cache: false
+        }).done(function(comments){
+            const body = $("#hotel_viewBody")
+            body.empty()
+            for(let c of comments){
+                body.append(loadComment(c))
+            }
+           
+        }).fail(function (xhr, status, error) {
+            console.log(`${xhr.status}: ${xhr.statusText}`)
+        })
+    })
+
 }
 
-function setReservation({id, hotelName, checkInDate, checkOutDate, noRooms, status, userName, checkInTime, checkOutTime}){
+function loadComment({userId, rate, comment}){
+    let stars = ratingStars(rate)
+
+    return `<div class="card">
+                <div class="card-header">${userId} ${stars}</div>
+                <div class="card-body">
+                    <p class="card-text">${comment}</p>
+                </div>
+            </div><br>`
+}
+
+function ratingStars(rate){
+    let stars = ""
+    let i;
+    for(i=1; i<=rate; i++){
+        stars += `<i class="bi bi-star-fill"></i>`
+    }
+    for(i; i<=5; i++){
+        stars += `<i class="bi bi-star"></i>`
+    }
+    return stars
+}
+
+function setReservation({id, hotelName, checkInDate, checkOutDate, noRooms, status, userName, checkInTime, checkOutTime, hotelId}){
     let action = ""
     const i = new Date(checkInDate)
     const o = new Date(checkOutDate)
@@ -71,8 +164,11 @@ function setReservation({id, hotelName, checkInDate, checkOutDate, noRooms, stat
         action = `<h2>Cancelled</h2>`
     }
 
+    
     return `<br><div class="card">
-        <h3 class="card-header">${hotelName}</h3>
+        <h3 class="card-header">
+            <a role="button" data-toggle="modal" data-target="#hotelViews" hotelId=${hotelId}>${hotelName}</a>
+        </h3>
         <div class="card-body" bookingId=${id}>
             <div class="row">
                 <div class="col-9">
@@ -82,7 +178,10 @@ function setReservation({id, hotelName, checkInDate, checkOutDate, noRooms, stat
                         <div class="col-4"><p>${noRooms} rooms, ${days} nights</p> <p>${userName}</p></div>
                     </div>
                 </div>
-                <div class="col-3">${action}</div>
+                <div class="col-3">
+                    ${action}<br><br>
+                    <button hotelName='${hotelName}' type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#comment">Leave a Comment</button>
+                </div>
             </div>
         </div>
     </div>`

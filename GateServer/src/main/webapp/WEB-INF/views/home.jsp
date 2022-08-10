@@ -229,7 +229,20 @@
 
       <!-- Modal body -->
       <div class="modal-body" id="hotel_viewBody">        
-        	         
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title">userEmail</h5>
+				<div>rate/5</div>
+				<p class="card-text">comment</p>
+			</div>
+		</div><br>
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title">userEmail</h5>
+				<div>rate/5</div>
+				<p class="card-text">comment</p>
+			</div>
+		</div>
       </div>
 
       <!-- Modal footer -->

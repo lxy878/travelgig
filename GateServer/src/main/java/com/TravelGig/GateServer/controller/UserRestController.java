@@ -59,4 +59,9 @@ public class UserRestController {
         return map;
     }
 
+    @PostMapping("/user/makeComment")
+    private ResponseEntity<JsonNode> makeComment(@RequestBody JsonNode json){
+        JsonNode respond = bookingClient.postRequest(json, "/saveComment");
+        return new ResponseEntity<>(respond, HttpStatus.OK);
+    }
 }

@@ -8,4 +8,6 @@ public interface CommentService {
     public Comment save(Comment comment);
     public List<Comment> getCommentsBy(int hotelId);
     public List<Comment> getCommentsBy(int hotelId, String uId);
+    public int countRate(int hotelId);
+    public int sumRate(int hotelId);
 }

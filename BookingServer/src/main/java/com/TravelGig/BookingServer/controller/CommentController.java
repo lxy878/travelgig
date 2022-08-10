@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.TravelGig.BookingServer.domain.Comment;
+import com.TravelGig.BookingServer.domain.Hotel;
 import com.TravelGig.BookingServer.service.CommentService;
+import com.TravelGig.BookingServer.service.HotelService;
 
 
 @RestController
@@ -18,9 +20,19 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    HotelService hotelService;
+
     @PostMapping("/saveComment")
     private Comment saveComment(@RequestBody Comment comment){
-        return commentService.save(comment);
+        Hotel h = hotelService.geHotel(comment.getHotelName());
+        comment.setHotelId(h.getHotelId());
+        Comment c = commentService.save(comment);
+        int sum = commentService.sumRate(h.getHotelId());
+        int count = commentService.countRate(h.getHotelId());
+        h.setStarRating(sum/count);
+        hotelService.update(h);
+        return c;
     }
 
     @GetMapping("/getComments/{hotelId}")
@@ -32,5 +44,4 @@ public class CommentController {
     public List<Comment> getCommentsByHotelAndUser(@PathVariable int hotelId, @PathVariable String uId) {
         return commentService.getCommentsBy(hotelId, uId);
     }
-    
 }

@@ -15,11 +15,6 @@ public class CommentServiceImpl implements CommentService{
     CommentRepository commentRepository;
 
     @Override
-    public Comment save(Comment comment) {
-        return commentRepository.save(comment);
-    }
-
-    @Override
     public List<Comment> getCommentsBy(int hotelId) {
         
         return commentRepository.findAllByHotelId(hotelId);
