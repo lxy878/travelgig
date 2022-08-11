@@ -48,50 +48,50 @@
 	Star Rating:<br>
 	<div class="form-check-inline">
 		<label class="form-check-label">
-			<input type="checkbox" class="star_rating form-check-input" id="1_star_rating" value=1>1
+			<input type="checkbox" class="star_rating form-check-input" id="1_star_rating" name="stars" value=1>1
 		</label>
 	</div>
 	<div class="form-check-inline">
 		<label class="form-check-label">
-			<input type="checkbox" class="star_rating form-check-input" id="2_star_rating" value=2>2		
+			<input type="checkbox" class="star_rating form-check-input" id="2_star_rating" name="stars" value=2>2		
 		</label>
 	</div>
 	<div class="form-check-inline">
 		<label class="form-check-label">
-			<input type="checkbox" class="star_rating form-check-input" id="3_star_rating" value=3>3
+			<input type="checkbox" class="star_rating form-check-input" id="3_star_rating" name="stars" value=3>3
 		</label>
 	</div>
 	<div class="form-check-inline">
 		<label class="form-check-label">
-			<input type="checkbox" class="star_rating form-check-input" id="4_star_rating" value=4>4
+			<input type="checkbox" class="star_rating form-check-input" id="4_star_rating" name="stars" value=4>4
 		</label>
 	</div>
 	<div class="form-check-inline">
 		<label class="form-check-label">
-			<input type="checkbox" class="star_rating form-check-input" id="5_star_rating" value=5>5
+			<input type="checkbox" class="star_rating form-check-input" id="5_star_rating" name="stars" value=5>5
 		</label>
 	</div><br><br>
 	
 	Range:
 	<div class="slidecontainer">
-  		<input type="range" min="1" max="500" value="500" class="slider" id="priceRange">
+  		<input type="range" min="1" max="2000" value="500" class="slider" id="priceRange">
   		<p>Price: $<span id="priceValue"></span></p>
 	</div>
 	
 	<div class="form-check">
-		<input type="checkbox" class="hotel_amenity form-check-input" id="amenity_parking" value="PARKING"/>
+		<input type="checkbox" class="hotel_amenity form-check-input" id="amenity_parking" name="amenities" value="Parking"/>
 		<label class="form-check-label" for="amenity_parking">Parking</label><br>
 		
-		<input type="checkbox" class="hotel_amenity form-check-input" id="amenity_checkin_checkout" value="CHECK-IN & CHECK-OUT TIMES"/>
-		<label class="form-check-label" for="amenity_checkin_checkout">Check-In & Check-Out Times</label><br>
+		<input type="checkbox" class="hotel_amenity form-check-input" id="amenity_room_service" name="amenities" value="Room service"/>
+		<label class="form-check-label" for="amenity_checkin_checkout">Room Service</label><br>
 		
-		<input type="checkbox" class="hotel_amenity form-check-input" id="amenity_breakfast" value="BREAKFAST"/>
+		<input type="checkbox" class="hotel_amenity form-check-input" id="amenity_breakfast" name="amenities" value="Breakfast"/>
 		<label class="form-check-label" for="amenity_breakfast">Breakfast</label><br>
 		
-		<input type="checkbox" class="hotel_amenity form-check-input" id="amenity_bar_lounge" value="BAR OR LOUNGE"/>
+		<input type="checkbox" class="hotel_amenity form-check-input" id="amenity_bar_lounge" name="amenities" value="Bar or Lounge"/>
 		<label class="form-check-label" for="amenity_bar_lounge">Bar / Lounge</label><br>
 		
-		<input type="checkbox" class="hotel_amenity form-check-input" id="amenity_fitness_center" value="FITNESS CENTER"/>
+		<input type="checkbox" class="hotel_amenity form-check-input" id="amenity_fitness_center" name="amenities" value="Fitness c	enter"/>
 		<label class="form-check-label" for="amenity_fitness_center">Fitness Center</label><br>
 	</div>
 	

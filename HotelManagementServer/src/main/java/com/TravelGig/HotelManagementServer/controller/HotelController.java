@@ -14,6 +14,7 @@ import com.TravelGig.HotelManagementServer.domain.Comment;
 import com.TravelGig.HotelManagementServer.domain.Hotel;
 import com.TravelGig.HotelManagementServer.domain.HotelRoom;
 import com.TravelGig.HotelManagementServer.domain.RoomType;
+import com.TravelGig.HotelManagementServer.domain.SearchHotel;
 import com.TravelGig.HotelManagementServer.service.CommentService;
 import com.TravelGig.HotelManagementServer.service.HotelRoomService;
 import com.TravelGig.HotelManagementServer.service.HotelService;
@@ -68,5 +69,10 @@ public class HotelController {
     @GetMapping("/getComments/{hotelId}")
     private List<Comment> getCommentsByHotel(@PathVariable int hotelId){
         return commentService.getCommentsBy(hotelId);
+    }
+
+    @PostMapping("/searchHotelsByOthers")
+    private List<Hotel> searchHotelsByOthers(@RequestBody SearchHotel sh){
+        return hotelService.findAllByOthers(sh);
     }
 }

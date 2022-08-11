@@ -47,4 +47,10 @@ public class HotelRestController {
         JsonNode respond = hotelManagementClient.getRequest("/getComments/"+hotelId);
         return new ResponseEntity<>(respond, HttpStatus.OK);
     }
+
+    @PostMapping("/searchHotelsByOther")
+    private ResponseEntity<JsonNode> searchHotelsByOther(@RequestBody JsonNode json){
+        JsonNode respond = hotelManagementClient.postRequest("/searchHotelsByOthers", json);
+        return new ResponseEntity<>(respond, HttpStatus.OK);
+    }
 }

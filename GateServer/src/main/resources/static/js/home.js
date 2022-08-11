@@ -152,6 +152,43 @@ $(function(){
             console.log(`${xhr.status}: ${xhr.statusText}`)
         })
     })
+
+    $("#filterBtn").on("click", function(){
+        const stars = $(".star_rating")
+        const amenities = $(".hotel_amenity")
+        const checkBoxes = $("input[type=checkbox]")
+        const data = {
+            location: $("#searchLocation").val(),
+            price: $("#priceValue").text(),
+            stars:[],
+            amenities: []
+        }
+        
+        for(let c of checkBoxes){
+            if($(c).is(":checked")){
+                data[$(c).attr("name")].push($(c).val())
+            }
+        }
+
+         $.ajax({
+            url: `http://localhost:8080/searchHotelsByOther`,
+            type: "post",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(data),
+            cache: false
+        }).done(function(hotels){
+            const list = $("#listHotel")
+            list.empty()
+            for(let h of hotels){
+                list.append(showHotel(h, data))
+            }
+           
+        }).fail(function (xhr, status, error) {
+            console.log(`${xhr.status}: ${xhr.statusText}`)
+        })
+    })
+
 })
 
 function loadComment({userId, rate, comment}){

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.TravelGig.HotelManagementServer.domain.Amenities;
 import com.TravelGig.HotelManagementServer.domain.Hotel;
+import com.TravelGig.HotelManagementServer.domain.SearchHotel;
 import com.TravelGig.HotelManagementServer.repository.HotelRepository;
 
 @Service
@@ -36,7 +37,7 @@ public class HotelServiceImpl implements HotelService{
 
     @Override
     public List<Hotel> getHotelsByWord(String word){
-        return hotelRepository.findAllByHotelNameContainingOrCityContainingOrStateContainingOrAddressContaining(word, word, word, word);
+        return hotelRepository.findAllByLoation(word);
     }
 
     @Override
@@ -49,6 +50,11 @@ public class HotelServiceImpl implements HotelService{
         Optional<Hotel> hotel = hotelRepository.findById(id);
         
         return hotel.isPresent()? hotel.get():null;
+    }
+
+    @Override
+    public List<Hotel> findAllByOthers(SearchHotel sh){
+        return hotelRepository.findAllByOthers(sh.getLocation(), sh.getPrice(), sh.getStars());
     }
     
 }

@@ -1,5 +1,6 @@
 package com.TravelGig.GateServer.restclient;
 
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,17 @@ public class HotelManagementClient {
     }
 
     public JsonNode postRequest(String path, JsonNode json){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
-        return null;
+        HttpEntity<String> entity = new HttpEntity<>(json.toString(), headers);
+        
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Object> responseEntity = restTemplate.postForEntity(baseUrl+path, entity, Object.class);
+        Object body = responseEntity.getBody();
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode respond = mapper.convertValue(body, JsonNode.class);
+        
+        return respond;
     }
 }
