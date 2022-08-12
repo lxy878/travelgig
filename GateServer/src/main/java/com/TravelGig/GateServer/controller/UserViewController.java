@@ -40,7 +40,7 @@ public class UserViewController {
 				new SecurityContextLogoutHandler().logout(httpServletRequest, httpServletResponse, auth);
 			}
 			message="Logout";
-			return "login";
+			return "redirect:/";
 		}
 	
 		model.addAttribute("Message", message);

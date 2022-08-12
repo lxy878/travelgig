@@ -15,7 +15,6 @@
     <nav class="navbar navbar-expand-lg bg-light" id="user" uId="${uId}">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">TravelGig</a>
-            </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
@@ -29,6 +28,7 @@
                 </li>
             </ul>
             </div>
+            <a role="button" class="btn btn-primary" href="/login?logout">Log out</a>
         </div>
     </nav>
 

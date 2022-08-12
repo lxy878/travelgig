@@ -18,12 +18,14 @@ public class HotelViewController {
     @GetMapping({"/", "/home", "/index"})
     private String home(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String user = auth.getName();
-        if(user.compareTo("anonymousUser")==0){
-            user = "";
+        String user = "";
+        if(auth.getName().compareTo("anonymousUser")!=0){
+            user = auth.getName();
         }
+        // check completed reservations
         bookingClient.getRequest("/completedBooking");    
         model.addAttribute("uId", user);
+
         return "home";
     }
 }

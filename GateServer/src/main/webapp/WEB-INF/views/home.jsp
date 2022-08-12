@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +17,16 @@
 <body>
 <div class="container" style="margin-left:100px">
 <h1>Welcome to Travel Gig</h1>
+<c:choose>
+	<c:when test="${not empty uId}">
+		<a href="/user/upcomeReservation/${uId}">View</a>
+		<a href="/login?logout">logout</a>
+	</c:when>
+	<c:otherwise>
+		<a href="/login\">login</a>
+	</c:otherwise>
+</c:choose>
 <h2>Search your desired hotel</h2>
-<a href="/user/upcomeReservation/${uId}">View</a>
-<a href="/login">login</a>
 </div>
 
 <div class="container border rounded" style="margin:auto;padding:50px;margin-top:50px;margin-bottom:50px">
