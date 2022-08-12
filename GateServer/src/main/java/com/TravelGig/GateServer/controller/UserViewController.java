@@ -64,14 +64,13 @@ public class UserViewController {
 
 	@RequestMapping("/bookingStatus")
 	private String bookingStatus(Model model, BookingDetail bd){
-
+		System.out.println(bd.toString());
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode json = mapper.convertValue(bd, JsonNode.class);
 		JsonNode respond = bookingClient.postRequest(json, "/bookingRooms");
-		
-		System.out.println(respond.get("email").asText());
+		String email = respond.get("email").asText();
 		model.addAttribute("message", "testing");
 		// redirect to user/upcomeReservation/{user email}
-		return "bookingStatus";
+		return "redirect:user/upcomeReservation/"+email;
 	}
 }

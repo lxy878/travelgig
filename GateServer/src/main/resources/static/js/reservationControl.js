@@ -47,7 +47,6 @@ function getReservations(status){
     }).done(function(bookingDetails){
         const view = $("#reservationView")
         view.empty()
-        console.log(bookingDetails)
         for(let bd of bookingDetails){
             view.append(setReservation(bd))
         }
@@ -59,6 +58,7 @@ function getReservations(status){
     $("#comment").on("shown.bs.modal", function(event){
         const hotelName = $(event.relatedTarget).attr("hotelName")
         $("#commentSubmit").attr("hotelName", hotelName)
+        $(this).off('shown.bs.modal');
     })
     
     $("#commentSubmit").on('click', function(){
@@ -180,7 +180,7 @@ function setReservation({id, hotelName, checkInDate, checkOutDate, noRooms, stat
                 </div>
                 <div class="col-3">
                     ${action}<br><br>
-                    <button hotelName='${hotelName}' type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#comment">Leave a Comment</button>
+                    <button hotelName='${hotelName}' type="button" class="btn btn-primary" data-toggle="modal" data-target="#comment">Leave a Comment</button>
                 </div>
             </div>
         </div>

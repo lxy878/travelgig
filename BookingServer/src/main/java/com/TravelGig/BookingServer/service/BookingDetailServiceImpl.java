@@ -32,6 +32,9 @@ public class BookingDetailServiceImpl implements BookingDetailService{
         bd.setCheckInTime(h.getTimesBooked());
         bd.setCheckOutTime(h.getTimesBooked());
         User u = userService.getUser(bd.getEmail());
+        if(u == null){
+            return null;
+        }
         bd.setUserName(u.getLastName()+", "+u.getFirstName());
         return bookingDetailRepository.save(bd);
     }

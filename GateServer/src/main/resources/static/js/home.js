@@ -98,7 +98,7 @@ $(function(){
 
         const i = new Date($("#booking_checkInDate").val())
         const o = new Date($("#booking_checkOutDate").val())
-        const days = (o-i)/1000/3600/24
+        const days = ((o-i)/1000/3600/24)+1
 
         for(let tr of roomTrs){
             const isSelected = $(tr).find("td input").prop("checked")
