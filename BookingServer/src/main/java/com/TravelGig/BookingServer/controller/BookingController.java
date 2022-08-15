@@ -2,6 +2,7 @@ package com.TravelGig.BookingServer.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.TravelGig.BookingServer.component.CreateFile;
 import com.TravelGig.BookingServer.domain.BookingDetail;
 import com.TravelGig.BookingServer.service.BookingDetailService;
 import com.TravelGig.BookingServer.service.EmailService;
@@ -24,11 +25,16 @@ public class BookingController {
 
     @Autowired
     EmailService emailService;
+
+    @Autowired
+    CreateFile createFile;
     
     @PostMapping(value="/bookingRooms")
     public BookingDetail postMethodName(@RequestBody BookingDetail bd) {
         bd = bookingDetailService.save(bd);
-        emailService.sentEmail(bd.getEmail(), bd.getId(), "Hotel Reservation Comfirmation", messageForm(bd));
+        String message = createFile.messageForm(bd);
+        String pdfPath = createFile.PDF(message, "/pdf/", "Reservation_"+bd.getId()+".pdf");
+        emailService.sentEmail(bd.getEmail(), bd.getId(), "Hotel Reservation Comfirmation", message, pdfPath);
         return bd;
     }
 
@@ -45,18 +51,5 @@ public class BookingController {
     @GetMapping(value = "/completedBooking")
     public List<BookingDetail> completedBooking(){
         return bookingDetailService.completedBooking();
-    }
-
-    private String messageForm(BookingDetail bd){
-        StringBuilder message = new StringBuilder();
-        message.append("\nBooking Id: "+bd.getId());
-        message.append("\nHotel Name: "+bd.getHotelName());
-        message.append("\nCheck In: "+bd.getCheckInDate());
-        message.append("\nCheck Out: "+bd.getCheckOutDate());
-        message.append("\nGuest No. : "+bd.getNoGuests());
-        message.append("\nRoom No. : "+bd.getNoRooms());
-        message.append("\nRoom Type : "+bd.getRoomType());
-        message.append("\nCustomer Name : "+bd.getUserName());
-        return message.toString();
     }
 }
