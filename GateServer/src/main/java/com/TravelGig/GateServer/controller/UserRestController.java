@@ -64,4 +64,10 @@ public class UserRestController {
         JsonNode respond = bookingClient.postRequest(json, "/saveComment");
         return new ResponseEntity<>(respond, HttpStatus.OK);
     }
+
+    @PostMapping("/user/sumbitQuestion")
+    private ResponseEntity<JsonNode> sumbitQuestion(@RequestBody JsonNode json){
+        JsonNode respond = bookingClient.postRequest(json, "/createQA");
+        return new ResponseEntity<>(respond, HttpStatus.OK);
+    }
 }

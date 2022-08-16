@@ -125,6 +125,34 @@ function getReservations(status){
         })
     })
 
+    $("#QuestionForm").on("shown.bs.modal", function(event){
+        const hotelId = $(event.relatedTarget).attr("hotelId")
+        $("#hotelId").val(hotelId)
+        $("#userEmail").val($("#user").attr("uId"))
+        $(this).off('shown.bs.modal');
+    })
+
+    $("#qa_submit").on("click", function(){
+        const body = $(this).parent()
+        const inputs = $(body).children(".form_input")
+        const today = new Date().toLocaleDateString("en-CA")
+        const data = {status: "pending", createDate: today}
+        for(let i of inputs){
+            data[$(i).attr("name")] = $(i).val()
+        }
+        $.ajax({
+            url: "http://localhost:8080/user/sumbitQuestion",
+            type: "post",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            dataType: "json"
+        }).done(function(data){
+            console.log(data)
+        }).fail(function (xhr, status, error) {
+            console.log(`${xhr.status}: ${xhr.statusText}`)
+        })
+    })
+
 }
 
 function loadComment({userId, rate, comment}){
@@ -167,7 +195,7 @@ function setReservation({id, hotelName, checkInDate, checkOutDate, noRooms, stat
     
     return `<br><div class="card">
         <h3 class="card-header">
-            <a role="button" data-toggle="modal" data-target="#hotelViews" hotelId=${hotelId}>${hotelName}</a>
+            <a href="#" role="button" data-toggle="modal" data-target="#hotelViews" hotelId=${hotelId}>${hotelName}</a>
         </h3>
         <div class="card-body" bookingId=${id}>
             <div class="row">
@@ -182,6 +210,7 @@ function setReservation({id, hotelName, checkInDate, checkOutDate, noRooms, stat
                     ${action}<br><br>
                     <button hotelName='${hotelName}' type="button" class="btn btn-primary" data-toggle="modal" data-target="#comment">Leave a Comment</button>
                 </div>
+                <div class="col-12"><a role="button" data-toggle="modal" data-target="#QuestionForm" href="#" hotelId=${hotelId}>Ask a Question</a></div>
             </div>
         </div>
     </div>`

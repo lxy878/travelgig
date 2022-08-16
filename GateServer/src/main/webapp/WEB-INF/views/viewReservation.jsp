@@ -89,7 +89,7 @@
                     <label class="form-check-label" >5</label>
                 </div>
 
-                <br><input style="margin-top:25px" class="btn btn-searchHotelRooms btn-primary" type="button" data-dismiss="modal" value="Comment" id="commentSubmit"/>       	
+                <br><input style="margin-top:25px" class="btn btn-primary" type="button" data-dismiss="modal" value="Comment" id="commentSubmit"/>       	
             </div>
 
             <!-- Modal footer -->
@@ -118,6 +118,32 @@
             <div class="modal-footer">
             </div>
 
+            </div>
+        </div>
+    </div>
+    
+     <div class="modal" id="QuestionForm">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Submit a Question</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" id="QuestionForm_body">        
+                <input class="form_input" name="hotelId" id="hotelId" hidden/>
+                <input class="form_input" name="userEmail" id="userEmail" hidden/>
+                <textarea class="form-control form_input" name="question" placeholder="Type your Question" id="textarea"></textarea>
+
+                <br><input style="margin-top:25px" class="btn btn-primary" type="button" data-dismiss="modal" value="Send a Question" id="qa_submit"/>       	
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                
             </div>
         </div>
     </div>
