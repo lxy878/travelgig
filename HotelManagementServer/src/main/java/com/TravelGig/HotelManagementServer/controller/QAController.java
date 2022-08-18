@@ -27,4 +27,9 @@ public class QAController {
         return qaService.getQABy(status);
     }
 
+    @GetMapping("/expiredQAs")
+    private List<QA> expiredQAs(@RequestParam String status){
+        return qaService.isExpired(status);
+    }
+
 }

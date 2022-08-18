@@ -1,5 +1,7 @@
 package com.TravelGig.HotelManagementServer.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +46,16 @@ public class QAServiceImpl implements QAService{
 
     @Override
     public List<QA> isExpired(String status) {
-        return null;
+        // get current date
+        LocalDateTime daysBefore = LocalDateTime.now().minusDays(4);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String db = dtf.format(daysBefore);
+        List<QA> qas = qaRepository.findAllByStatusAndCreateDateBefore(status, db);
+        // set qas
+        for(QA qa : qas){
+            qa.setStatus("expired");
+        }
+        return qaRepository.saveAll(qas);
     }
     
 }

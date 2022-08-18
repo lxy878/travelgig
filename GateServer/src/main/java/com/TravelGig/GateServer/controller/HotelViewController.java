@@ -8,12 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.TravelGig.GateServer.restclient.BookingClient;
+import com.TravelGig.GateServer.restclient.HotelManagementClient;
 
 @Controller
 public class HotelViewController {
     
     @Autowired
     BookingClient bookingClient;
+
+    @Autowired
+    HotelManagementClient hotelManagementClient;
 
     @GetMapping({"/", "/home", "/index"})
     private String home(Model model){
@@ -24,8 +28,11 @@ public class HotelViewController {
         }
         // check completed reservations
         bookingClient.getRequest("/completedBooking");    
+        // check expried qas
+        hotelManagementClient.getRequest("/expiredQAs?status=pending");
         model.addAttribute("uId", user);
 
         return "home";
     }
+
 }

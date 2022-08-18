@@ -254,7 +254,6 @@
 									value="Confirm Booking" />
 								<button class='btn btn-primary' data-dismiss="modal" data-toggle="modal"
 									data-target="#roomSearch" id="book_edit">Edit</button>
-								<%-- <button class='btn btn-primary'>Edit</button> --%>
 							</div>
 						</form>
 					</div>
