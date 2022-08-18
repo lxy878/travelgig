@@ -345,6 +345,45 @@
         </div>
     </div>
 
+	<div class="modal" id="userQAs">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">View Other Users' Questions </h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body" id="userQAs_body">
+
+                    <div class="accordion" id="userQuestions">
+                        <div class="card">
+                            <div class="card-header" id="q1">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#a1" aria-expanded="false" aria-controls="a1">
+                                        Q1
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="a1" class="collapse" aria-labelledby="q1" data-parent="#userQuestions">
+                                <div class="card-body">
+                                    A1
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 	<script>
 		var slider = document.getElementById("priceRange");

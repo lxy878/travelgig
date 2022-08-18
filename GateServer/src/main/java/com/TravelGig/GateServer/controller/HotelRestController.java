@@ -55,8 +55,8 @@ public class HotelRestController {
         return new ResponseEntity<>(respond, HttpStatus.OK);
     }
     
-    @GetMapping("/getCommonQuestions")
-    private ResponseEntity<JsonNode> getCommonQuestions(@RequestParam int hotelId, @RequestParam String status){
+    @GetMapping("/getQuestions")
+    private ResponseEntity<JsonNode> getQuestions(@RequestParam int hotelId, @RequestParam String status){
         JsonNode respond = hotelManagementClient.getRequest("/getQAsByHotelAndStatus?hotelId="+hotelId+"&status="+status);
         return new ResponseEntity<>(respond, HttpStatus.OK);
     }

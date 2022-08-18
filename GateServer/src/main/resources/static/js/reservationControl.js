@@ -156,7 +156,7 @@ function getReservations(status){
     $("#qasView").on("shown.bs.modal", function(event){
         const hotelId = $(event.relatedTarget).attr("hotelId")
         $.ajax({
-            url: `http://localhost:8080/getCommonQuestions?hotelId=${hotelId}&status=common`,
+            url: `http://localhost:8080/getQuestions?hotelId=${hotelId}&status=common`,
             type: "get",
             contentType: "application/json",
             cache: false
@@ -171,6 +171,46 @@ function getReservations(status){
             console.log(`${xhr.status}: ${xhr.statusText}`)
         })
     })
+
+    $("#userQAs").on("shown.bs.modal", function(event){
+        const hotelId = $(event.relatedTarget).attr("hotelId")
+        
+        $.ajax({
+            url: `http://localhost:8080/getQuestions?hotelId=${hotelId}&status=answered`,
+            type: "get",
+            contentType: "application/json",
+            cache: false
+        }).done(function(qas){
+            console.log(qas)
+            const body = $("#userQuestions")
+            body.empty()
+            for(let qa of qas){
+                body.append(setUserQA(qa))
+            }
+
+        }).fail(function (xhr, status, error) {
+            console.log(`${xhr.status}: ${xhr.statusText}`)
+        })
+    })
+}
+
+function setUserQA({id, userEmail, question, serviceId, answer}){
+    return `
+    <div class="card">
+        <div class="card-header" id="q${id}">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#a${id}" aria-expanded="false" aria-controls="a${id}">
+                    ${userEmail}: ${question}
+                </button>
+            </h2>
+        </div>
+        <div id="a${id}" class="collapse" aria-labelledby="q${id}" data-parent="#userQuestions">
+            <div class="card-body">
+                ${serviceId}: ${answer}
+            </div>
+        </div>
+    </div>
+    `
 }
 
 function setQA({id, question, answer }){
@@ -247,8 +287,9 @@ function setReservation({id, hotelName, checkInDate, checkOutDate, noRooms, stat
                     ${action}<br><br>
                     <button hotelName='${hotelName}' type="button" class="btn btn-primary" data-toggle="modal" data-target="#comment">Leave a Comment</button>
                 </div>
-                <div class="col-6"><a role="button" data-toggle="modal" data-target="#QuestionForm" href="#" hotelId=${hotelId}>Ask a Question</a></div>
-                <div class="col-6"><a role="button" data-toggle="modal" data-target="#qasView" href="#" hotelId=${hotelId}>View QA's</a></div>
+                <div class="col-4"><a role="button" data-toggle="modal" data-target="#QuestionForm" href="#" hotelId=${hotelId}>Ask a Question</a></div>
+                <div class="col-4"><a role="button" data-toggle="modal" data-target="#qasView" href="#" hotelId=${hotelId}>View QA's</a></div>
+                <div class="col-4"><a role="button" data-toggle="modal" data-target="#userQAs" href="#" hotelId=${hotelId}>View Users' QAs</a></div>
             </div>
         </div>
     </div>`
