@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.TravelGig.BookingServer.domain.QA;
 import com.TravelGig.BookingServer.service.QAService;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -32,6 +33,11 @@ public class QAController {
     @GetMapping("/getQAsByStatus")
     public List<QA> getQAsByStatus(@RequestParam String status){
         return qaService.getQABy(status);
+    }
+
+    @PostMapping("/updateQA")
+    private QA updateQA(@RequestBody JsonNode json){
+        return qaService.answerQA(json.get("id").asInt(), json.get("answer").asText(), json.get("serivceId").asText(), json.get("status").asText());
     }
 
 }

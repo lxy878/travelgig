@@ -70,4 +70,10 @@ public class UserRestController {
         JsonNode respond = bookingClient.postRequest(json, "/createQA");
         return new ResponseEntity<>(respond, HttpStatus.OK);
     }
+
+    @PostMapping("/user/updateQA")
+    private ResponseEntity<JsonNode> updateQA(@RequestBody JsonNode json){
+        JsonNode respond = bookingClient.postRequest(json, "/updateQA");
+        return new ResponseEntity<>(respond, HttpStatus.OK);
+    }
 }

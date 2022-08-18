@@ -189,7 +189,45 @@ $(function(){
         })
     })
 
+    $("#qasView").on("shown.bs.modal", function(event){
+        const hotelId = $(event.relatedTarget).attr("hotelId")
+        $.ajax({
+            url: `http://localhost:8080/getCommonQuestions?hotelId=${hotelId}&status=common`,
+            type: "get",
+            contentType: "application/json",
+            cache: false
+        }).done(function(qas){
+            const body = $("#commonQuestions")
+            body.empty()
+            for(let qa of qas){
+                body.append(setQA(qa))
+            }
+
+        }).fail(function (xhr, status, error) {
+            console.log(`${xhr.status}: ${xhr.statusText}`)
+        })
+    })
+
 })
+
+function setQA({id, question, answer }){
+    return `
+    <div class="card">
+        <div class="card-header" id="q${id}">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#a${id}" aria-expanded="false" aria-controls="a${id}">
+                    ${question}
+                </button>
+            </h2>
+        </div>
+        <div id="a${id}" class="collapse" aria-labelledby="q${id}" data-parent="#commonQuestions">
+            <div class="card-body">
+                ${answer}
+            </div>
+        </div>
+    </div>
+    `
+}
 
 function loadComment({userId, rate, comment}){
     let stars = ratingStars(rate)
@@ -260,6 +298,9 @@ function showHotel({imageURL, city, state, averagePrice, discount, hotelId, hote
                                         <strong>$${averagePrice-averagePrice*discount}</strong>
                                     </button>   
                                 </div>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-6"><a role="button" data-toggle="modal" data-target="#qasView" href="#" hotelId=${hotelId}>View QA's</a></div>
                             </div>
                         </div>
                     </div>

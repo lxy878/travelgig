@@ -1,14 +1,14 @@
-package com.TravelGig.BookingServer.service;
+package com.TravelGig.HotelManagementServer.service;
 
 import java.util.List;
 
-import com.TravelGig.BookingServer.domain.QA;
+import com.TravelGig.HotelManagementServer.domain.QA;
 
 public interface QAService {
     public List<QA> getQABy(int hotelId, String status);
     public List<QA> getQABy(String status);
     public QA createQA(QA qa);
-    public QA answerQA(int id, String answer, String serviceId, String status);
+    public QA answerQA(int id, String answer, String serviceId);
     public List<QA> isExpired(String status);
     
 }

@@ -1,4 +1,4 @@
-package com.TravelGig.BookingServer.service;
+package com.TravelGig.HotelManagementServer.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.TravelGig.BookingServer.domain.QA;
-import com.TravelGig.BookingServer.repository.QARepository;
+import com.TravelGig.HotelManagementServer.domain.QA;
+import com.TravelGig.HotelManagementServer.repository.QARepository;
 
 @Service
 public class QAServiceImpl implements QAService{
@@ -30,7 +30,7 @@ public class QAServiceImpl implements QAService{
     }
 
     @Override
-    public QA answerQA(int id, String answer, String serviceId, String status) {
+    public QA answerQA(int id, String answer, String serviceId) {
         Optional<QA> oqa = qaRepository.findById(id);
         if(!oqa.isPresent()){
             return null;
@@ -38,7 +38,7 @@ public class QAServiceImpl implements QAService{
         QA qa = oqa.get();
         qa.setAnswer(answer);
         qa.setServiceId(serviceId);
-        qa.setStatus(status);
+        qa.setStatus("answered");
         return qaRepository.save(qa);
     }
 

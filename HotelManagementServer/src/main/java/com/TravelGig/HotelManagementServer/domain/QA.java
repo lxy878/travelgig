@@ -1,4 +1,4 @@
-package com.TravelGig.BookingServer.domain;
+package com.TravelGig.HotelManagementServer.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

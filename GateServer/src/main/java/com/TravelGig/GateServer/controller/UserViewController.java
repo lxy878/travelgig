@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,7 +71,12 @@ public class UserViewController {
 		JsonNode respond = bookingClient.postRequest(json, "/bookingRooms");
 		String email = respond.get("email").asText();
 		model.addAttribute("message", "testing");
-		// redirect to user/upcomeReservation/{user email}
 		return "redirect:user/upcomeReservation/"+email;
+	}
+
+	@GetMapping("/user/viewQuestions/{uEmail}")
+	private String viewQuestions(@PathVariable String uEmail, Model model){
+		model.addAttribute("uEmail", uEmail);
+		return "viewQuestions";
 	}
 }

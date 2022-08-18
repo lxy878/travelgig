@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.TravelGig.GateServer.restclient.HotelManagementClient;
@@ -51,6 +52,18 @@ public class HotelRestController {
     @PostMapping("/searchHotelsByOther")
     private ResponseEntity<JsonNode> searchHotelsByOther(@RequestBody JsonNode json){
         JsonNode respond = hotelManagementClient.postRequest("/searchHotelsByOthers", json);
+        return new ResponseEntity<>(respond, HttpStatus.OK);
+    }
+    
+    @GetMapping("/getCommonQuestions")
+    private ResponseEntity<JsonNode> getCommonQuestions(@RequestParam int hotelId, @RequestParam String status){
+        JsonNode respond = hotelManagementClient.getRequest("/getQAsByHotelAndStatus?hotelId="+hotelId+"&status="+status);
+        return new ResponseEntity<>(respond, HttpStatus.OK);
+    }
+
+    @GetMapping("/getQAsByStatus")
+    private ResponseEntity<JsonNode> getQAsByStatus(@RequestParam String status){
+        JsonNode respond = hotelManagementClient.getRequest("/getQAsByStatus?status="+status);
         return new ResponseEntity<>(respond, HttpStatus.OK);
     }
 }
