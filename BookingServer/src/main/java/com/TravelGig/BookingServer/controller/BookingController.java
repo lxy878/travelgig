@@ -34,7 +34,7 @@ public class BookingController {
         bd = bookingDetailService.save(bd);
         String message = createFile.messageForm(bd);
         String pdfPath = createFile.PDF(message, "/pdf/", "Reservation_"+bd.getId()+".pdf");
-        emailService.sentEmail(bd.getEmail(), bd.getId(), "Hotel Reservation Comfirmation", message, pdfPath);
+        emailService.sentEmail(bd.getEmail(), "Hotel Reservation Comfirmation", message, pdfPath);
         return bd;
     }
 
