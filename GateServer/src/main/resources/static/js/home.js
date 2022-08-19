@@ -280,9 +280,12 @@ function loadComment({userId, rate, comment}){
 }
 
 function setRoom({hotelRoomId, type, noRooms, description, policies, price, discount, amenities}){
-    
+    let as =""
+    for(let a of amenities){
+        as += `<div class="font-small"><i class="bi bi-check">${a.name}</i></div>`
+    }
     return `<tr roomId=${hotelRoomId}>
-        <td>${type.name}/amenities</td>
+        <td>${type.name}${as}</td>
         <td>${noRooms}</td>
         <td><p>${description}</p><p>${policies}</p></td>
         <td name="discount">${discount}</td>
@@ -334,7 +337,7 @@ function showHotel({imageURL, city, state, averagePrice, discount, hotelId, hote
                                 <div class="col-md-9"></div>
                                 <div class="col-md-3 font-large">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roomSearch" hotelId=${hotelId} hotelName="${hotelName}">
-                                        <strong>$${averagePrice-averagePrice*discount}</strong>
+                                        <strong>$${averagePrice}</strong>
                                     </button>   
                                 </div>
                             </div>

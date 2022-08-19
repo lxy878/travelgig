@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 
@@ -30,6 +32,9 @@
                     </li>
                 </ul>
             </div>
+            <c:if test="${admin == 'admin'}">
+                <a style="margin-right: 20px;" role="button" class="btn btn-primary" href="/user/viewQuestions/${uId}">View Questions</a>
+            </c:if>
             <a role="button" class="btn btn-primary" href="/login?logout">Log out</a>
         </div>
     </nav>

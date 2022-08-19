@@ -29,10 +29,10 @@ public class EmailService {
                 FileSystemResource file = new FileSystemResource(new File(pdfPath));
                 helper.addAttachment("Reservation_Information.pdf", file);
             }
-            javaMailSender.send(msg);
         } catch (MessagingException e) {
-            
             e.printStackTrace();
+        } finally{
+            javaMailSender.send(msg);
         }
         
     }
