@@ -28,7 +28,11 @@ public class BookingDetailServiceImpl implements BookingDetailService{
     @Override
     public BookingDetail save(BookingDetail bd) {
         bd.setStatus("booked");
+        System.out.println(bd.toString());
         Hotel h = hotelService.getHotel(bd.getHotelId());
+        if(h==null){
+            return null;
+        }
         bd.setCheckInTime(h.getTimesBooked());
         bd.setCheckOutTime(h.getTimesBooked());
         User u = userService.getUser(bd.getEmail());
