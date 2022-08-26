@@ -22,7 +22,7 @@
         <a href="${pageContext.request.contextPath}/home">Home</a>
     </div>
 
-    <form action='/charge' method='POST' id='checkout-form' modelAttribute="bookingDetail">
+    <%-- <form action='/charge' method='POST' id='checkout-form' modelAttribute="bookingDetail">
         <h3>View Booking Detail</h3>
         <div><input value="${hotelId}" path="hotelId" class="form-control" type="hidden" id="booking_hotelId"
                 name="bd.hotelId" /></div>
@@ -55,7 +55,7 @@
             data-image="https://desitecoreprod-cd.azureedge.net/_/media/images/png/svg/icon-credit-card-hand.svg?la=en&rev=8ccff093864643b7b8d8863595f1e4b0?h=180&w=180"
             data-locale='auto' data-zip-code='false'>
         </script>
-    </form>
+    </form> --%>
 </body>
 
 </html>

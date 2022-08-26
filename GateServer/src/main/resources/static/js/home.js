@@ -109,6 +109,7 @@ $(function(){
                 const noRooms = $("#booking_noRooms").val()
                 const totalCost = parseFloat(price)*(1-parseFloat(discount))*noRooms*days
                 $("#booking_price").val(totalCost)
+                $("#amount").val(parseInt(totalCost*100))
                 break
             }
         }

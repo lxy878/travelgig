@@ -28,8 +28,7 @@ public class UserRestController {
     @PostMapping("/saveUser")
     private ResponseEntity<String> saveUser(@RequestBody User user){
         User u = userService.createUser(user);
-        System.out.println(u.toString());
-        return new ResponseEntity<>("Account is created", HttpStatus.OK);
+        return u != null ? new ResponseEntity<>("Account is created", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.FAILED_DEPENDENCY);
     }
 
     @PostMapping("/user/getBookingDetails")
@@ -40,7 +39,6 @@ public class UserRestController {
 
     @GetMapping("/user/cancelBooking/{bId}")
     private ResponseEntity<JsonNode> getBookingDetails(@PathVariable int bId){
-        System.out.println("cancel");
         JsonNode respond = bookingClient.getRequest("/cancelBookingDetails/"+bId);
         return new ResponseEntity<>(respond, HttpStatus.OK);
     }

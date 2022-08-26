@@ -13,23 +13,30 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.TravelGig.GateServer.domain.BookingDetail;
 import com.TravelGig.GateServer.domain.ChargeRequest;
+import com.TravelGig.GateServer.domain.ChargeRequest.Currency;
 import com.TravelGig.GateServer.restclient.BookingClient;
+import com.TravelGig.GateServer.service.StripeService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
 
 @Controller
 public class UserViewController {
     
 	@Autowired
 	BookingClient bookingClient;
+
+	@Autowired
+    private StripeService paymentsService;
 
 	@Value("pk_test_51LZfmYI7vGXctebNF4wGJTPeI0rfF6Z4JlTtvritKAXAaxHm9RsAvdKvauGdTsfYXfMidTkngoqGthmThp2qZFb600JrunhnlA")
     private String stripePublicKey;
@@ -77,20 +84,25 @@ public class UserViewController {
     }
 
 	@RequestMapping("/bookingStatus")
-	private String bookingStatus(Model model, @ModelAttribute BookingDetail bd){
-		// ObjectMapper mapper = new ObjectMapper();
-		// JsonNode json = mapper.convertValue(bd, JsonNode.class);
-		// JsonNode respond = bookingClient.postRequest(json, "/bookingRooms");
-		// String email = respond.get("email").asText();
-		model.addAttribute("bookingDetail", bd);
-		model.addAttribute("hotelId", (int)bd.getHotelId());
-		model.addAttribute("noRooms", (int)bd.getNoRooms());
-		model.addAttribute("noGuests", (int)bd.getNoGuests());
-		model.addAttribute("price", (int)bd.getPrice()*100);
-        model.addAttribute("stripePublicKey", stripePublicKey);
-        model.addAttribute("currency", ChargeRequest.Currency.USD);
-		return "bookingStatus";
-		// return "redirect:user/upcomeReservation/"+email;
+	private String bookingStatus(Model model, ChargeRequest chargeRequest) throws StripeException{
+		
+		chargeRequest.setDescription("booking charge");
+        chargeRequest.setCurrency(Currency.USD);
+        Charge charge = paymentsService.charge(chargeRequest);
+
+		model.addAttribute("id", charge.getId());
+        model.addAttribute("status", charge.getStatus());
+        model.addAttribute("chargeId", charge.getId());
+        model.addAttribute("balance_transaction", charge.getBalanceTransaction());
+        model.addAttribute("message", "loaded");
+
+		//booking
+		BookingDetail bd = chargeRequest.getBd();
+        ObjectMapper mapper = new ObjectMapper();
+		JsonNode json = mapper.convertValue(bd, JsonNode.class);
+		JsonNode respond = bookingClient.postRequest(json, "/bookingRooms");
+		String email = respond.get("email").asText();
+		return "redirect:user/upcomeReservation/"+email;
 	}
 
 	@GetMapping("/user/viewQuestions/{uEmail}")
@@ -98,4 +110,10 @@ public class UserViewController {
 		model.addAttribute("uEmail", uEmail);
 		return "viewQuestions";
 	}
+
+	@ExceptionHandler(StripeException.class)
+    public String handleError(Model model, StripeException ex) {
+        model.addAttribute("error", ex.getMessage());
+        return "result";
+    }
 }

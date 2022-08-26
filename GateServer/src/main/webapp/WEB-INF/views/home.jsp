@@ -230,31 +230,42 @@
 					<div class="col">
 						<form action="/bookingStatus" method="post">
 							<div><input class="form-control" type="hidden" id="booking_hotelId"
-									name="hotelId" /></div>
+									name="bd.hotelId" /></div>
 							<div><input class="form-control" type="hidden" id="booking_hotelRoomId"
-									name="hotelRoomId" /></div>
+									name="bd.hotelRoomId" /></div>
 							<div>Hotel Name: <input readonly="true" class="form-control" type="text"
-									id="booking_hotelName" name="hotelName" /></div>
+									id="booking_hotelName" name="bd.hotelName" /></div>
 							<div>Email: <input value="${uId}" class="form-control" type="email"
-									id="booking_email" name="email" /></div>
+									id="booking_email" name="bd.email" /></div>
 							<div id="noGuestsDiv">No. Guests: <input readonly="true" class="form-control"
-									type="number" id="booking_noGuests" name="noGuests" /></div>
+									type="number" id="booking_noGuests" name="bd.noGuests" /></div>
 							<div>No. Rooms: <input readonly="true" class="form-control" type="number"
-									id="booking_noRooms" name="noRooms" /></div>
+									id="booking_noRooms" name="bd.noRooms" /></div>
 							<div>Check-In Date: <input readonly="true" class="form-control" type="text"
-									id="booking_checkInDate" name="checkInDate" /></div>
+									id="booking_checkInDate" name="bd.checkInDate" /></div>
 							<div>Check-Out Date: <input readonly="true" class="form-control" type="text"
-									id="booking_checkOutDate" name="checkOutDate" /></div>
+									id="booking_checkOutDate" name="bd.checkOutDate" /></div>
 							<div>Room Type: <input readonly="true" class="form-control" type="text"
-									id="booking_roomType" name="roomType" /></div>
+									id="booking_roomType" name="bd.roomType" /></div>
 							<div>Total Price: $<input class="form-control" type="number" id="booking_price"
-									name="price" readonly="true"></span></div>
+									name="bd.price" readonly="true"></span></div>
 							<div style='margin-top:20px'>
-								<input type="submit" class='btn-confirm-booking btn btn-primary' id="booking"
-									value="Confirm Booking" />
+							<input type='hidden' name='amount' id="amount"/>
+							<script src='https://checkout.stripe.com/checkout.js' class='stripe-button' 
+								data-key="${stripePublicKey}" 
+								data-currency="${currency}"
+								data-name='Payment' 
+								data-description="Booking"
+								data-image="https://desitecoreprod-cd.azureedge.net/_/media/images/png/svg/icon-credit-card-hand.svg?la=en&rev=8ccff093864643b7b8d8863595f1e4b0?h=180&w=180"
+								data-locale='auto' data-zip-code='false'>
+							</script>
+
 								<button class='btn btn-primary' data-dismiss="modal" data-toggle="modal"
 									data-target="#roomSearch" id="book_edit">Edit</button>
 							</div>
+
+							<%-- <input type="submit" class='btn-confirm-booking btn btn-primary' id="booking"
+									value="Confirm Booking" /> --%>
 						</form>
 					</div>
 				</div>
