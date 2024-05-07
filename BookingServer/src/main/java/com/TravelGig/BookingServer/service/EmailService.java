@@ -30,8 +30,7 @@ public class EmailService {
                 helper.setText(message);
                 if(pdfPath == null){
                     helper.addAttachment("Reservation_Information.pdf", new ClassPathResource(pdfPath));
-                }
-                
+                }     
             }
             
         };

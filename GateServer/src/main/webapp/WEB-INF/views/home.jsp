@@ -264,8 +264,6 @@
 									data-target="#roomSearch" id="book_edit">Edit</button>
 							</div>
 
-							<%-- <input type="submit" class='btn-confirm-booking btn btn-primary' id="booking"
-									value="Confirm Booking" /> --%>
 						</form>
 					</div>
 				</div>
